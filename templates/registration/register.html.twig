@@ -1,7 +1,10 @@
 {% extends 'base.html.twig' %}
+
 {% block title %} {% endblock %}
 {% block body %}
+
     <body>
+
     <!--  Start Header Area -->
     <div class="top-header-area bg-color-091c47">
         <div class="container">
@@ -68,10 +71,20 @@
     <div class="my-account-area ptb-100">
         <div class="container">
             <div class="row">
+
+
+
                 <div class="col-lg-6">
-                    <form class="login-register-form-area register" method="post">
                         {{ form_start(registrationForm) }}
                         {{ form_row(registrationForm.roles) }}
+                    <div class="toggleswitch">
+                        <input type="checkbox" name="toggleswitch" value="" class="toggleswitch-checkbox" id="myonoffswitch" checked>
+                        <label class="toggleswitch-label" for="myonoffswitch">
+                            <span class="toggleswitch-inner"></span>
+                            <span class="toggleswitch-switch"></span>
+                        </label>
+                    </div>
+
                         {{ form_row(registrationForm.nom) }}
                         {{ form_row(registrationForm.prenom) }}
                         {{ form_row(registrationForm.email) }}
@@ -86,7 +99,6 @@
 
                             <p>Don’t have an account? <a >Login</a></p>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
