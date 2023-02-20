@@ -58,6 +58,8 @@ class AuthentificationAuthenticator extends AbstractLoginFormAuthenticator
                 return new RedirectResponse($this->urlGenerator->generate('medecin'));
             elseif (in_array('ROLE_PATIENT', $roles))
                 return new RedirectResponse($this->urlGenerator->generate('patient'));
+            elseif (in_array('ROLE_ADMIN', $roles))
+                return new RedirectResponse($this->urlGenerator->generate('homeAdmin'));
 
         return new RedirectResponse($this->urlGenerator->generate('home'));
         // For example
