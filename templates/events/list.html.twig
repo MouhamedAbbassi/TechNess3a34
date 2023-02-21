@@ -20,8 +20,8 @@
               <p class="card-text">{{event.nom}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">participate</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ path('app_evenement_index_front_details') }}">Voir Détails</a> </button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Participer</button>
                 </div>
                 <small class="text-muted">{{event.capacite}}</small>
               </div>

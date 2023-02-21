@@ -27,6 +27,13 @@ class EvenementController extends AbstractController
             'evenements' => $evenementRepository->findAll(),
         ]);
     }
+    #[Route('/details', name: 'app_evenement_index_front_details', methods: ['GET'])]
+    public function frontindexx(EvenementRepository $evenementRepository): Response
+    {
+        return $this->render('main/details.html.twig', [
+            'evenements' => $evenementRepository->findAll(),
+        ]);
+    }
 
     #[Route('/new', name: 'app_evenement_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EvenementRepository $evenementRepository): Response
