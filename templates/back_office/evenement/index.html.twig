@@ -14,7 +14,7 @@
                 <th>Local</th>
                 <th>Date</th>
                 <th>Prix</th>
-            <th>type</th>
+                <th>type</th>
                 
                 <th>actions</th>
             </tr>
@@ -29,6 +29,7 @@
                 <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
                 <td>{{ evenement.prix }}</td>
                 <td>{{ evenement.type }}</td>
+                
 
                 <td>
                    <button type="button" class="btn btn-outline-info"><a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">show</a></button>

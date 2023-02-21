@@ -39,6 +39,10 @@ class Evenement
     #[ORM\ManyToOne(inversedBy: 'event')]
     private ?Categorie $type = null;
 
+    #[ORM\Column(length: 255)]
+    #[assert\NotBlank(message:"Veuillez entrer un description a propos cet évenement  !")]
+    private ?string $Description = null;
+
 
     public function getId(): ?int
     {
@@ -113,6 +117,18 @@ class Evenement
     public function setType(?Categorie $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->Description;
+    }
+
+    public function setDescription(string $Description): self
+    {
+        $this->Description = $Description;
 
         return $this;
     }

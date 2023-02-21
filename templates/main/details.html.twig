@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    {# <body>
+     <body>
 	
  
 		
@@ -39,7 +39,7 @@
                         {% for details in evenements %}
                             <tr>
                                 <td>{{ details.id }}</td>
-                                <td>{{ details.nom}}/td>
+                                <td>{{ details.nom}}</td>
                                 <td>{{ details.capacite }}</td>
                                 <td>{{ details.local }}</td>
                                 <td>{{ details.date ? details.date|date('Y-m-d') : ''}}</td>
@@ -81,8 +81,8 @@
  
 
 
-    </body> #}
-    <body>
+    </body> 
+    {# <body>
     
 <div class="container">
 
@@ -194,6 +194,6 @@
     
   
 
-</body>
+</body> #}
 
 {% endblock %}
