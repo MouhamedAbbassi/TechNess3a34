@@ -73,8 +73,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'medecin')]
     private ?Speciality $speciality = null;
 
-
-
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Reservation::class)]
     private Collection $reservations;
 
