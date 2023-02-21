@@ -76,7 +76,11 @@
 
                                         <ul class="dropdown-menu">
                                             <li class="nav-item">
+                                                {% if is_granted('ROLE_PATIENT') %}
                                                 <a href="{{path('app_reservation_index')}}" class="nav-link">Consultations</a>
+                                                {% elseif is_granted('ROLE_MEDECIN') %}
+                                                <a href="{{path('app_reservation_index_med')}}" class="nav-link">Consultations</a>
+                                                {% endif %}
                                             </li>
                                             <li class="nav-item">
                                                 <a href="department-orthopedics.html" class="nav-link">Department Orthopedics</a>
