@@ -29,7 +29,17 @@ class ReservationController extends AbstractController
     }
 
 
-   
+    #[Route('/', name: 'app_reservation_index', methods: ['GET'])]
+    public function index_med(UserRepository $userRepository,ReservationRepository $reservationRepository): Response
+    {
+        $userp = $this->getUser()->getId();
+        return $this->render('reservation/display.html.twig', [
+
+            'reservations' => $reservationRepository->ghayth_med($userp),
+           
+        ]);
+    }
+
     
 
     

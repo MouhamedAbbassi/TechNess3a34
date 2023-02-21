@@ -50,6 +50,17 @@ class ReservationRepository extends ServiceEntityRepository
    
     }
 
+    public function ghayth_med($id): array
+    {
+       return $this->createQueryBuilder('s')
+      
+       ->where('s.users = :idc') 
+       ->setParameter('idc',$id)
+       ->getQuery()
+       ->getResult();
+   
+    }
+
 //    /**
 //     * @return Reservation[] Returns an array of Reservation objects
 //     */
