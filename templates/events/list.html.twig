@@ -1,0 +1,69 @@
+{% extends 'nav_con.html.twig' %}
+
+{% block title %} {% endblock %}
+
+{% block body %}
+
+   <main>
+    <section class="py-5 text-center container">
+    <div class="dropdown-menu d-block position-static pt-0 mx-0 rounded-3 shadow overflow-hidden w-280px">
+    <form class="p-2 mb-2 bg-light border-bottom">
+      <input type="search" class="form-control" autocomplete="false" placeholder="Type to filter...">
+    </form>
+    <ul class="list-unstyled mb-0">
+      <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+        <span class="d-inline-block bg-success rounded-circle p-1"></span>
+        Action
+      </a></li>
+      <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+        <span class="d-inline-block bg-primary rounded-circle p-1"></span>
+        Another action
+      </a></li>
+      <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+        <span class="d-inline-block bg-danger rounded-circle p-1"></span>
+        Something else here
+      </a></li>
+      <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+        <span class="d-inline-block bg-info rounded-circle p-1"></span>
+        Separated link
+      </a></li>
+    </ul>
+  </div>https://github.com/MouhamedAbbassi/TechNess3a34.git
+  </section>
+
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+       {% for event in evenements %}
+      
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <div class="card-body">
+              <p class="card-text">{{event.nom}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">participate</button>
+                </div>
+                <small class="text-muted">{{event.capacite}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        </div>
+        </div>
+        </div>
+        </main>
+{% endblock %}
+{% block js %}
+    {{ parent() }}
+    <script src="{{ asset('backOffice/js/custom/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backOffice/js/custom/dataTables.bootstrap5.min.js') }}"></script>
+    <script>
+        $('#ordonance-list').DataTable();
+    </script>
+{% endblock %}
+

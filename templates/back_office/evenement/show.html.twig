@@ -1,0 +1,41 @@
+{% extends 'back_office/base.html.twig' %}
+{% block title %}Evenement{% endblock %}
+
+{% block content %}
+    <h1>Evenement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ evenement.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ evenement.nom }}</td>
+            </tr>
+            <tr>
+                <th>Capacite</th>
+                <td>{{ evenement.capacite }}</td>
+            </tr>
+            <tr>
+                <th>Local</th>
+                <td>{{ evenement.local }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ evenement.prix }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_evenement_index') }}">back to list</a>
+
+    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a>
+
+    
+{% endblock %}
