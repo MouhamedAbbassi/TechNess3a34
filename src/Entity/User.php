@@ -72,12 +72,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'medecin')]
     private ?Speciality $speciality = null;
 
-    public function __construct()
-    {
-        $this->speciality = null;
-    }
-
-
     public function getId(): ?int
     {
         return $this->id;
