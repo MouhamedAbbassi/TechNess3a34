@@ -81,4 +81,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function findmed($value): ?User
+ {
+    return $this->createQueryBuilder('s')
+    ->where('s.id = :val') 
+    ->setParameter('val' , $value)
+    ->getQuery()
+    ->getOneOrNullResult();
+
+ }
 }
