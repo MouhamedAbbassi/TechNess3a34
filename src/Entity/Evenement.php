@@ -36,6 +36,10 @@ class Evenement
     #[assert\NotBlank(message:"Veuillez entrer le prix  !")]
     private ?string $prix = null;
 
+    #[ORM\ManyToOne(inversedBy: 'event')]
+    private ?Categorie $type = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -100,4 +104,17 @@ class Evenement
 
         return $this;
     }
+
+    public function getType(): ?Categorie
+    {
+        return $this->type;
+    }
+
+    public function setType(?Categorie $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
 }

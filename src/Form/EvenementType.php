@@ -20,23 +20,15 @@ class EvenementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('nom', TextType::class, [
-            'label' => 'Nom',
-            'required' => true,
-            'constraints' => [
-                    new Assert\Length([
-                    'min' => 2,
-                    'max' => 100,
-                    'minMessage' => 'Le champ Nom doit contenir au moins 2 caractères.',
-                    'maxMessage' => 'Le champ Nom ne peut pas contenir plus de 50 caractères.',
-                ]),
-            ],
-        ])
+        ->add('nom')
+        
             ->add('capacite')
             ->add('local')
             ->add('date')
             ->add('prix')
-        ;
+            ->add('type')
+
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

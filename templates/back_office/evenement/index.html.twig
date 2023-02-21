@@ -1,9 +1,9 @@
 {% extends 'back_office/base.html.twig' %}
 
-{% block title %}Evenement index{% endblock %}
+{% block title %}Evenements{% endblock %}
 
 {% block content %}
-    <h1>Evenement index</h1>
+    <h1>Nos Evenements</h1>
 
     <table class="table">
         <thead>
@@ -14,6 +14,8 @@
                 <th>Local</th>
                 <th>Date</th>
                 <th>Prix</th>
+            <th>type</th>
+                
                 <th>actions</th>
             </tr>
         </thead>
@@ -26,10 +28,18 @@
                 <td>{{ evenement.local }}</td>
                 <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
                 <td>{{ evenement.prix }}</td>
+                <td>{{ evenement.type }}</td>
+
                 <td>
-                    <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">show</a>
-                    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a>
-                    <a href="{{ path('app_evenement_delete', {'id': evenement.id}) }}">delete</a>
+                   <button type="button" class="btn btn-outline-info"><a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">show</a></button>
+
+
+                    <button type="button" class="btn btn-outline-warning"><a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a></button>
+
+                    
+                    <button type="button" class="btn btn-outline-danger"><a href="{{ path('app_evenement_delete', {'id': evenement.id}) }}">delete</a></button>
+
+                    
                 </td>
             </tr>
         {% else %}
@@ -38,7 +48,13 @@
             </tr>
         {% endfor %}
         </tbody>
+        
     </table>
+ 
+<div class="d-grid gap-2 d-md-block">
+<button type="button" class="btn btn-outline-success"><a href="{{ path('app_evenement_new') }}">Create new</a> </button>
 
-    <a href="{{ path('app_evenement_new') }}">Create new</a>
+  
+</div>
+   
 {% endblock %}
