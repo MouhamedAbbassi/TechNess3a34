@@ -73,8 +73,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'medecin')]
     private ?Speciality $speciality = null;
 
-<<<<<<< HEAD
-=======
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Reservation::class)]
     private Collection $reservations;
 
@@ -91,7 +89,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
->>>>>>> 2bb28063daf54f3fe6e7bda32d3b57441cf4b3ef
     public function getId(): ?int
     {
         return $this->id;
