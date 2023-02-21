@@ -58,6 +58,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
+    
 
 
     /**
@@ -72,9 +73,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'medecin')]
     private ?Speciality $speciality = null;
 
+    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Reservation::class)]
+    private Collection $reservations;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $prix = null;
+
+    #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Reservation::class)]
+    private Collection $reservpat;
+
     public function __construct()
     {
         $this->speciality = null;
+        $this->reservpat = new ArrayCollection();
     }
 
 
@@ -289,6 +300,86 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
+ //partie reservation ghayth , stay away 
 
+    
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getUsers() === $this) {
+                $reservation->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    public function __tostring() :string{
+
+        return $this->nom;
+        
+            }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?float $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservpat(): Collection
+    {
+        return $this->reservpat;
+    }
+
+    public function addReservpat(Reservation $reservpat): self
+    {
+        if (!$this->reservpat->contains($reservpat)) {
+            $this->reservpat->add($reservpat);
+            $reservpat->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservpat(Reservation $reservpat): self
+    {
+        if ($this->reservpat->removeElement($reservpat)) {
+            // set the owning side to null (unless already changed)
+            if ($reservpat->getPatient() === $this) {
+                $reservpat->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
 
 }
