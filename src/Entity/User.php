@@ -82,13 +82,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Reservation::class)]
     private Collection $reservpat;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $status = null;
+
 
     public function __construct()
     {
         $this->speciality = null;
         $this->reservpat = new ArrayCollection();
+        $this->rates = new ArrayCollection();
     }
 
 
@@ -385,14 +385,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isStatus(): ?bool
-    {
-        return $this->status;
-    }
-
-    public function setStatus(?bool $status): self
-    {
-        $this->status = $status;
 
         return $this;
     }

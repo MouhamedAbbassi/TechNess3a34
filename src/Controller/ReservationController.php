@@ -29,7 +29,16 @@ class ReservationController extends AbstractController
     }
 
    
-   
+    #[Route('/', name: 'app_reservation_index_admin', methods: ['GET'])]
+    public function index_admin(UserRepository $userRepository,ReservationRepository $reservationRepository): Response
+    {
+       
+        return $this->render('reservation/display.html.twig', [
+
+            'reservations' => $reservationRepository->findAll(),
+           
+        ]);
+    }
     
 
     
@@ -54,7 +63,10 @@ class ReservationController extends AbstractController
         
         $users = $userRepository->findmed($id);
         $userp = $this->getUser();
-        $reservation = new Reservation();
+        $reservation = new Reservation();  
+
+
+        
        
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
