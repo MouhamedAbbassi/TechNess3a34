@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Entity;
 
+namespace App\Entity;
+use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ReservationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
