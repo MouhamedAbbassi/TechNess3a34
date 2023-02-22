@@ -22,8 +22,7 @@ class ModifierProfileType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('speciality')
-            ->add('licenceNumero')
-            ->add('bioDescription')
+             ->add('bioDescription')
             ->add('numero')
             ->add('adresse')
 
