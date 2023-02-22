@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Classroom;
 use App\Entity\User;
+use App\Repository\UserRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +14,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class HomeController extends AbstractController
 {
+    #[Route('/', name: 'index')]
+    public function index(): Response
+    {
+        return $this->redirectToRoute('home');
+    }
+
     #[Route('/home', name: 'home')]
     public function home(): Response
     {
@@ -81,11 +90,29 @@ class HomeController extends AbstractController
 
 
     }
-
-    #[Route('/', name: 'index')]
-    public function index(): Response
+    #[Route('/listMedecin', name: 'listMedecin')]
+    public function listMedecin(ManagerRegistry $doctrine): Response
     {
-        return $this->redirectToRoute('home');
+
+
+        $user= $doctrine->getRepository(User::class)->findAll();
+         return $this->render('back_office/Security/listMedecin.html.twig', [
+            'user' => $user,
+
+        ]);
     }
+    #[Route('/listPatient', name: 'listPatient')]
+    public function listPatient(ManagerRegistry $doctrine): Response
+    {
+
+
+        $user= $doctrine->getRepository(User::class)->findAll();
+         return $this->render('back_office/Security/listPatient.html.twig', [
+            'user' => $user,
+
+        ]);
+    }
+
+
 
 }
