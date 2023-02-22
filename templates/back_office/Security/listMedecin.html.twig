@@ -52,16 +52,13 @@
 
                                                 {% if u.status == null %}
                                                 <a href="{{path('adminApprove',{'id':u.id})}}" type="button" class="btn btn-label-success btn-sm btn-upper">Approve</a>&nbsp;
-                                             {% endif   %}
+                                                {% endif %}
                                                 {% if u.status %}
-
                                                     <button  type="button" class="btn btn-label-success btn-sm btn-upper">
-                                                        Approved-
                                                         <i class="flaticon2-correct kt-font-success"></i>
+                                                        Approved
                                                     </button>&nbsp;
-
-
-                                                {% endif   %}
+                                                {% endif %}
                                                  <a type="button" class="btn btn-label-danger">Ban</a>&nbsp;
                                              </div>
                                         </div>

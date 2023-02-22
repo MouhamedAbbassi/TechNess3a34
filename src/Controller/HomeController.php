@@ -34,13 +34,7 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
-    #[Route('/loginAdmin', name: 'loginAdmin')]
-    public function loginAdmin(): Response
-    {
-        return $this->render('back_office/Security/loginAdmin.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
+
     #[Route('/homePatient', name: 'homePatient')]
     public function homePatient(): Response
     {
