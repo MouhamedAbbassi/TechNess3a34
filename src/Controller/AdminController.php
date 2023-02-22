@@ -28,6 +28,7 @@ class AdminController extends AbstractController
     {
         $em = $doctrine->getManager();
         $user = $doctrine->getRepository(User::class)->find($id);
+        $users = $doctrine->getRepository(User::class)->find($id);
         $form = $this->createForm(AdminApproveType::class,$user);
         $form->handleRequest($req);
         if($form->isSubmitted()){
@@ -38,7 +39,10 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('listMedecin');
 
         }
-        return $this->renderForm('back_office/security/adminApprove.html.twig',['form'=>$form]);
+        return $this->renderForm('back_office/security/adminApprove.html.twig',[
+            'users' => $users,
+            'form'=>$form
+        ]);
 
     }
 
