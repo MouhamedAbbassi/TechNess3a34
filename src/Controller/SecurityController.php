@@ -216,4 +216,13 @@ class SecurityController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('home');
     }
+    #[Route('banPatient/{id}', name: 'banPatient')]
+    public function banAccount(ManagerRegistry $doctrine,$id): Response
+    {
+        $em= $doctrine->getManager();
+        $user= $doctrine->getRepository(User::class)->find($id);
+        $em->remove($user);
+        $em->flush();
+        return $this->redirectToRoute('listPatient');
+    }
 }
