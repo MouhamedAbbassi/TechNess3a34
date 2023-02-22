@@ -70,7 +70,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $adresse = null;
 
-    #[ORM\ManyToOne(inversedBy: 'medecin')]
+    #[ORM\ManyToOne(inversedBy: 'medecin',cascade: ['remove'])]
     private ?Speciality $speciality = null;
 
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Reservation::class)]
@@ -81,6 +81,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Reservation::class)]
     private Collection $reservpat;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $status = null;
 
     public function __construct()
     {
@@ -378,6 +381,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $reservpat->setPatient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

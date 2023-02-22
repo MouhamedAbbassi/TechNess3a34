@@ -10,25 +10,38 @@
 		<div class="doctor-details-area ptb-100">
 			<div class="container">
 				<div class="doctor-details-content">
+					<div style=" padding-top: 35px;margin-left: 1100px">
+						<a class="default-btn active" href="{{path('modifierProfile',{'id':app.user.id})}}">Setting</a>
+					</div>
 					<div class="doctor-details-wrap">
 						<div class="row align-items-center">
 							<div class="col-lg-6">
 								<div class="doctor-img">
 									<img src="{{ asset('/uploads/'~app.user.image) }}" alt="Image">
 								</div>
-								<li>
-									<a class="default-btn active" href="{{path('modifierProfile',{'id':app.user.id})}}">Profile Setting</a>
-								</li>
+
 
 							</div>
 							<div class="col-lg-6">
 								<div class="doctor-content">
-									<h3>{{ app.user.nom  }}-{{ app.user.prenom }}</h3>
+									<h3>{{ app.user.nom  }}-{{ app.user.prenom }}
+										{% if app.user.status %}
+											<img src="{{ asset('/uploads/status.png') }}">
+										{% endif   %}
+									</h3>
+
 									<ul>
+										<li>
+
+											<h3>
+												{{ app.user.speciality }}
+											</h3>
+										</li>
 										<li>
 											<span>Email:</span>
 											{{ app.user.Email }}
-										</li>	<li>
+										</li>
+										<li>
 											<span>Address:</span>
 											{{ app.user.adresse }}
 										</li>
