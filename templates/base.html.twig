@@ -83,7 +83,11 @@
                                                 {% endif %}
                                             </li>
                                             <li class="nav-item">
-                                                <a href="department-orthopedics.html" class="nav-link">Department Orthopedics</a>
+                                                {% if is_granted('ROLE_PATIENT') %}
+                                                <a class="nav-link">Rate a doctor</a>
+                                                {% elseif is_granted('ROLE_MEDECIN') %}
+                                                
+                                                {% endif %}
                                             </li>
                                             <li class="nav-item">
                                                 <a href="find-a-doctor.html" class="nav-link">Find A Doctor</a>
@@ -388,16 +392,16 @@
                         <a href="index.html" class="logo">
                             <img src="{{ asset('frontOffice/assets/images/DocNet.png') }}" style="max-width: 40%" class="main-logo" alt="logo">
                         </a>
-                        <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec sollicitudin molestie.</p>
-                        <h4>177 Devon Lane Miami, MK 3355</h4>
+                        <p>Connect for your health , with DocNet.</p>
+                       
                         <ul class="info">
                             <li>
                                 <span>EMAIL US:</span>
-                                <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#224b4c444d6240475a4b0c414d4f"><span class="__cf_email__" data-cfemail="bfd6d1d9d0ffdddac7d691dcd0d2">[email&#160;protected]</span></a>
+                                <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#224b4c444d6240475a4b0c414d4f"><span class="__cf_email__" data-cfemail="bfd6d1d9d0ffdddac7d691dcd0d2">DocNet@gmail.com</span></a>
                             </li>
                             <li>
                                 <span>CALL US:</span>
-                                <a href="tel:1-885-665-2022">1-885-665-2022</a>
+                                <a href="tel:1-885-665-2022">20 557 030</a>
                             </li>
                         </ul>
                     </div>

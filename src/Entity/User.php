@@ -82,10 +82,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Reservation::class)]
     private Collection $reservpat;
 
+    #[ORM\OneToMany(mappedBy: 'med', targetEntity: Rate::class)]
+    private Collection $rates;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $notefinale = null;
+
     public function __construct()
     {
         $this->speciality = null;
         $this->reservpat = new ArrayCollection();
+        $this->rates = new ArrayCollection();
     }
 
 
@@ -378,6 +385,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $reservpat->setPatient(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Rate>
+     */
+    public function getRates(): Collection
+    {
+        return $this->rates;
+    }
+
+    public function addRate(Rate $rate): self
+    {
+        if (!$this->rates->contains($rate)) {
+            $this->rates->add($rate);
+            $rate->setMed($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRate(Rate $rate): self
+    {
+        if ($this->rates->removeElement($rate)) {
+            // set the owning side to null (unless already changed)
+            if ($rate->getMed() === $this) {
+                $rate->setMed(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getNotefinale(): ?float
+    {
+        return $this->notefinale;
+    }
+
+    public function setNotefinale(?float $notefinale): self
+    {
+        $this->notefinale = $notefinale;
 
         return $this;
     }
