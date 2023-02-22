@@ -31,9 +31,10 @@
                 <div style="margin-right: 300px" class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
 
                     <!--begin:: Widgets/Applications/User/Profile3-->
-                    <div class="kt-portlet">
-                        {% for u in user %}
-                            {% if u.roles == ["ROLE_PATIENT"] %}
+                    {% for u in user %}
+                        {% if u.roles == ["ROLE_PATIENT"] %}
+                    <div style="margin-bottom: 20px" class="kt-portlet">
+
                       <div class="row" >
                         <div  class="kt-portlet__body">
 
@@ -113,10 +114,10 @@
 
                         </div>
                       </div>
-                        {% endif %}
-                        {% endfor %}
-                    </div>
 
+                    </div>
+                    {% endif %}
+                    {% endfor %}
 
 
 

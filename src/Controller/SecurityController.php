@@ -210,20 +210,10 @@ class SecurityController extends AbstractController
     #[Route('deleteAccount/{id}', name: 'deleteAccount')]
     public function deleteAccount(ManagerRegistry $doctrine,$id): Response
     {
-        $currentUserId = $this->getUser()->getUserIdentifier();
-        if ($currentUserId == $id)
-        {
-            $session = $this->get('session');
-            $session = new Session();
-            $session->invalidate();
-        }
         $em= $doctrine->getManager();
         $user= $doctrine->getRepository(User::class)->find($id);
         $em->remove($user);
         $em->flush();
         return $this->redirectToRoute('home');
     }
-
-
-
 }
