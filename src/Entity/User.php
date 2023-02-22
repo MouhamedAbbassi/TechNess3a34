@@ -70,7 +70,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $adresse = null;
 
-    #[ORM\ManyToOne(inversedBy: 'medecin')]
+    #[ORM\ManyToOne(inversedBy: 'medecin',cascade: ['remove'])]
     private ?Speciality $speciality = null;
 
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Reservation::class)]
@@ -82,11 +82,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Reservation::class)]
     private Collection $reservpat;
 
-    #[ORM\OneToMany(mappedBy: 'med', targetEntity: Rate::class)]
-    private Collection $rates;
 
-    #[ORM\Column(nullable: true)]
-    private ?float $notefinale = null;
 
     public function __construct()
     {
@@ -389,44 +385,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Rate>
-     */
-    public function getRates(): Collection
-    {
-        return $this->rates;
-    }
-
-    public function addRate(Rate $rate): self
-    {
-        if (!$this->rates->contains($rate)) {
-            $this->rates->add($rate);
-            $rate->setMed($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRate(Rate $rate): self
-    {
-        if ($this->rates->removeElement($rate)) {
-            // set the owning side to null (unless already changed)
-            if ($rate->getMed() === $this) {
-                $rate->setMed(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getNotefinale(): ?float
-    {
-        return $this->notefinale;
-    }
-
-    public function setNotefinale(?float $notefinale): self
-    {
-        $this->notefinale = $notefinale;
 
         return $this;
     }

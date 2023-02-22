@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Symfony\Component\HttpFoundation\Session\Session;
 use App\Form\ForgetPasswordType;
 use App\Form\ModifierImageType;
 use App\Form\ModifierProfileType;
@@ -215,7 +216,4 @@ class SecurityController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('home');
     }
-
-
-
 }

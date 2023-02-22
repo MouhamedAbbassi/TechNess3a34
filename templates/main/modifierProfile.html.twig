@@ -10,20 +10,26 @@
 			<div class="container">
 				<div class="contact-form">
 					<h3>Update your profile</h3>
-					<a href="{{path('modifierImage',{'id':app.user.id})}}" class="default-btn active">Update Image</a>
-					<a href="{{path('verifierProfile',{'id':app.user.id})}}" class="default-btn active">Verify Account</a>
-						{{ form_start(form) }}
+					<a style="width: 220px;margin-bottom: 10px" href="{{path('modifierImage',{'id':app.user.id})}}" class="default-btn active">Update Image</a>
+					{% if app.user %}
+					{%  if is_granted('ROLE_MEDECIN') %}
+					{%  if app.user.status==null %}
+					<a style="width: 220px;margin-bottom: 10px;background-color: #28a745" href="{{path('verifierProfile',{'id':app.user.id})}}" class="default-btn active">Verify Account</a>
+					{% endif %}
+					{% endif %}
+					{% endif %}
+
+					{{ form_start(form) }}
 
 						{{ form_row(form.nom) }}
 						{{ form_row(form.prenom) }}
 						{{ form_row(form.speciality) }}
 						{{ form_row(form.numero) }}
 						{{ form_row(form.adresse) }}
-						{{ form_row(form.licenceNumero) }}
-						{{ form_row(form.bioDescription) }}
+ 						{{ form_row(form.bioDescription) }}
 						{{ form_end(form) }}
 
-					<a href="{{path('deleteAccount',{'id':app.user.id})}}" class="default-btn active">
+					<a style="width: 300px;margin-left: 430px ; background-color: red" href="{{path('deleteAccount',{'id':app.user.id})}}" class="default-btn active">
 						Delete Account
 					</a>
 

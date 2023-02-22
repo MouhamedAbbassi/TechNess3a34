@@ -18,7 +18,7 @@
                         <div class="col-lg-4">
                             <ul class="header-right-content">
                                 <li>
-                                    <i class="ri-settings-3-line"></i>
+                                    <i class="ri-home-6-line"></i>
                                     {%  if is_granted('ROLE_MEDECIN') %}
                                     <a href="{{path('medecin')}}">Profile</a>
                                     {% elseif is_granted('ROLE_PATIENT') %}
@@ -27,7 +27,7 @@
                                     {% endif %}
                                 </li>
                                 <li>
-                                    <i class="ri-settings-3-line"></i>
+                                    <i class="ri-logout-circle-line"></i>
                                     <a href="{{ path('app_logout') }}">Logout</a>
                                 </li>
 
