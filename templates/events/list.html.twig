@@ -7,6 +7,7 @@
    <main>
    
 
+{% block content %}
 
   <div class="album py-5 bg-light">
     <div class="container">
@@ -20,8 +21,8 @@
               <p class="card-text">{{event.nom}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ path('app_evenement_index_front_details') }}">Voir Détails</a> </button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Participer</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ path('app_evenement_show_front', {id :event.id()}) }}">Voir Détails</a> </button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" onclick ="msg()"><a href="{{ path('app_participation_new', {event: event.id()})  }}">Participer</a></button>
                 </div>
                 <small class="text-muted">{{event.capacite}}</small>
               </div>
@@ -34,12 +35,18 @@
         </div>
         </main>
 {% endblock %}
-{% block js %}
+{% block Javascript %}
     {{ parent() }}
     <script src="{{ asset('backOffice/js/custom/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('backOffice/js/custom/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('backOffice/js/custom/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('error/error.js') }}"></script>
+    <script> 
+     
+    </script>
     <script>
         $('#ordonance-list').DataTable();
     </script>
 {% endblock %}
 
+{% endblock %}

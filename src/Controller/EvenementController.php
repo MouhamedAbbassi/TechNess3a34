@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\FileType;
 
 #[Route('/evenement')]
 class EvenementController extends AbstractController
@@ -62,6 +63,15 @@ class EvenementController extends AbstractController
             'evenement' => $evenement,
         ]);
     }
+    #[Route('/user/{id}', name: 'app_evenement_show_front', methods: ['GET'])]
+    public function showf(Evenement $evenement): Response
+    {
+        
+        return $this->render('events/eventDetails.html.twig', [
+            'evenement' => $evenement,
+        ]);
+    }
+
 
     #[Route('/{id}/edit', name: 'app_evenement_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Evenement $evenement, EvenementRepository $evenementRepository): Response
@@ -70,6 +80,8 @@ class EvenementController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            
             $evenementRepository->save($evenement, true);
 
             return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
@@ -91,5 +103,8 @@ class EvenementController extends AbstractController
         return $this->render('back_office/evenement/index.html.twig', [
             'evenements' => $evenementRepository->findAll(),
         ]);
+        
 }
+
+
 }

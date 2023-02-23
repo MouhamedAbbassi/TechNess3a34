@@ -14,6 +14,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use App\Form\FileType;
 
 class EvenementType extends AbstractType
 {
@@ -60,7 +61,7 @@ class EvenementType extends AbstractType
             ])
             ->add('date')
             ->add('prix',TextType::class, [
-                'label' => 'local',
+                'label' => 'prix',
                 'required' => true,
                 
             'constraints' => [
@@ -78,14 +79,14 @@ class EvenementType extends AbstractType
                 'required' => true,
                 'constraints' => [
                         new Assert\Length([
-                        'min' => 100,
-                        'max' => 200,
-                        'minMessage' => 'Le champ decription doit contenir au moins 100 caractères.',
-                        'maxMessage' => 'Le champ local ne peut pas contenir plus de 200 caractères.',
-                        
+                        'min' => 20,
+                        'max' => 400,
+                        'minMessage' => 'Le champ description doit contenir au moins 20 caractères.',
+                        'maxMessage' => 'Le champ description ne peut pas contenir plus de 400 caractères.',
                     ]),
                 ],
             ])
+            
 
             ;
     }

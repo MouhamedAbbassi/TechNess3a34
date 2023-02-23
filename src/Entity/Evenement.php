@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EvenementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Mime\Message;
@@ -43,6 +45,22 @@ class Evenement
     #[assert\NotBlank(message:"Veuillez entrer un description a propos cet évenement  !")]
     private ?string $Description = null;
 
+    
+
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Participation::class)]
+    private Collection $participations;
+
+
+    public function __construct()
+    {
+        $this->participations = new ArrayCollection();
+    }
+
+    Public function __tostring() :string{
+
+        return $this->nom;
+        
+            }
 
     public function getId(): ?int
     {
@@ -132,5 +150,39 @@ class Evenement
 
         return $this;
     }
+
+  
+
+    /**
+     * @return Collection<int, Participation>
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations->add($participation);
+            $participation->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->participations->removeElement($participation)) {
+            // set the owning side to null (unless already changed)
+            if ($participation->getEvent() === $this) {
+                $participation->setEvent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
 
 }
