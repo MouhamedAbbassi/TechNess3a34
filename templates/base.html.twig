@@ -18,7 +18,7 @@
                         <div class="col-lg-4">
                             <ul class="header-right-content">
                                 <li>
-                                    <i class="ri-home-6-line"></i>
+                                    <i class="ri-user-follow-fill"></i>
                                     {%  if is_granted('ROLE_MEDECIN') %}
                                     <a href="{{path('medecin')}}">Profile</a>
                                     {% elseif is_granted('ROLE_PATIENT') %}
@@ -310,11 +310,11 @@
                     <div class="col-lg-4">
                         <ul class="header-right-content">
                             <li>
-                                <i class="ri-user-3-line"></i>
+                                <i class="ri-login-box-line"></i>
                                 <a href="{{path('login')}}">Login</a>
                             </li>
                             <li>
-                                <i class="ri-login-box-line"></i>
+                                <i class="ri-user-follow-line"></i>
                                 <a href="{{path('register')}}">Signup</a>
                             </li>
 

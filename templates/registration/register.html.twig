@@ -16,12 +16,13 @@
             <div class="row">
                 <div class="col-lg-6" style="width: 500px">
                         {{ form_start(registrationForm ,{'attr': {'novalidate': 'novalidate'}}) }}
-                        {{ form_row(registrationForm.roles ,{'attr': {'class': 'default-btn me-3'} } ) }}
+                        {{ form_label(registrationForm.roles ,'Signup as',{'attr':{'class':'default-btn me-3'}} ) }}
+                        {{ form_widget(registrationForm.roles ,{'attr':{'class':'default-btn me-3'}} ) }}
                         {{ form_row(registrationForm.nom,{'attr': {'novalidate': 'novalidate'}}) }}
                         {{ form_row(registrationForm.prenom,{'attr': {'novalidate': 'novalidate'}}) }}
                         {{ form_row(registrationForm.email ,{'attr': {'novalidate': 'novalidate'}}) }}
                         {{ form_row(registrationForm.plainPassword.first, { label: 'Password' }) }}
-                        {{ form_row(registrationForm.plainPassword.second, { label: 'Password' }) }}
+                        {{ form_row(registrationForm.plainPassword.second, { label: 'Confirm password' }) }}
                         {{ form_row(registrationForm.agreeTerms) }}
                         <div class="d-flex align-items-center">
                             <button type="submit" class="default-btn me-3">

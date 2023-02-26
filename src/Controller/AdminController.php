@@ -49,12 +49,9 @@ class AdminController extends AbstractController
     #[Route('/speciality', name: 'speciality')]
     public function speciality(ManagerRegistry $doctrine): Response
     {
-
-
         $speciality= $doctrine->getRepository(Speciality::class)->findAll();
         return $this->render('back_office/security/listSpeciality.html.twig', [
             'speciality' => $speciality,
-
         ]);
     }
     #[Route('addSpeciality', name: 'addSpeciality')]
@@ -72,7 +69,6 @@ class AdminController extends AbstractController
         //$club->setCreationDate(new \DateTime());
         return $this->renderForm('back_office/security/addSpeciality.html.twig',['form'=>$form]);
     }
-
     #[Route('deleteSpeciality/{id}', name: 'deleteSpeciality')]
     public function deleteSpeciality(ManagerRegistry $doctrine,$id): Response
     {
