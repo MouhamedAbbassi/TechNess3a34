@@ -134,16 +134,12 @@ class SecurityController extends AbstractController
     }
     #[Route('modifierImage/{id}', name: 'modifierImage')]
     public function modifierImage(ManagerRegistry $doctrine,$id,Request $req,SluggerInterface $slugger,User $user,): Response {
-
         $form = $this->createForm(ModifierImageType::class,$user);
-
-
         $form->handleRequest($req);
-
         if ($form->isSubmitted() && $form->isValid()) {
 
-            /** @var UploadedFile $eventImage */
-            $eventImage = $form->get('image')->getData();
+                /** @var UploadedFile $eventImage */
+                $eventImage = $form->get('image')->getData();
 
             // this condition is needed because the 'eventImage' field is not required
             // so the Image file must be processed only when a file is uploaded
