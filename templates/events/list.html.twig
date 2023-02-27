@@ -1,0 +1,52 @@
+{% extends 'nav_con.html.twig' %}
+
+{% block title %} {% endblock %}
+
+{% block body %}
+
+   <main>
+   
+
+{% block content %}
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+       {% for event in evenements %}
+      
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <div class="card-body">
+              <p class="card-text">{{event.nom}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ path('app_evenement_show_front', {id :event.id()}) }}">Voir Détails</a> </button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" onclick ="msg()"><a href="{{ path('app_participation_new', {event: event.id()})  }}">Participer</a></button>
+                </div>
+                <small class="text-muted">{{event.capacite}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        </div>
+        </div>
+        </div>
+        </main>
+{% endblock %}
+{% block Javascript %}
+    {{ parent() }}
+    <script src="{{ asset('backOffice/js/custom/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backOffice/js/custom/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('backOffice/js/custom/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('error/error.js') }}"></script>
+    <script> 
+     
+    </script>
+    <script>
+        $('#ordonance-list').DataTable();
+    </script>
+{% endblock %}
+
+{% endblock %}
