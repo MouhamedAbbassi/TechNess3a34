@@ -61,6 +61,7 @@ class EvenementController extends AbstractController
             'evenements' => $evenementRepository->findAll(),
         ]);
     }
+    #this is like section 
     #[Route('/events/{id}/likes', name: 'app_evenement_getlikes', methods: ['GET'])]
     public function getLikes(
         Request $request, 
