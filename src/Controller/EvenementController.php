@@ -3,17 +3,29 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
+use App\Entity\Like;
+use App\Entity\Likes;
 use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
+use App\Repository\LikeRepository;
+use App\Repository\LikesRepository;
+use App\Repository\UserRepository;
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\FileType;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+
 
 #[Route('/evenement')]
 class EvenementController extends AbstractController
 {
+  
     #[Route('/', name: 'app_evenement_index', methods: ['GET'])]
     public function index(EvenementRepository $evenementRepository): Response
     {
@@ -28,24 +40,74 @@ class EvenementController extends AbstractController
             'evenements' => $evenementRepository->findAll(),
         ]);
     }
+
+    #[Route('/events/like/{id}/{user}', name: 'app_evenement_like', methods: ['GET'])]
+    public function like(
+        Request $request, 
+          EvenementRepository $evenementRepository,
+          UserRepository $userRepository,
+          LikeRepository $likeRepository
+    ): Response
+    {
+        $event = $evenementRepository->find( $request->attributes->get("id"));
+        $user = $userRepository->find( $request->attributes->get("user"));
+        $like = new Like();
+        $like->setEvenement($event);
+        $like->addUser($user);
+        $likeRepository->save($like, true); 
+        $event->addLike($like); 
+        $evenementRepository->save($event , true );
+        return $this->redirectToRoute('app_evenement_index_front', [
+            'evenements' => $evenementRepository->findAll(),
+        ]);
+    }
+    #[Route('/events/{id}/likes', name: 'app_evenement_getlikes', methods: ['GET'])]
+    public function getLikes(
+        Request $request, 
+          EvenementRepository $evenementRepository, 
+          LikeRepository $likeRepository
+    ): Response
+    {
+        $event = $evenementRepository->find( $request->attributes->get("id")); 
+        $like= $likeRepository->find($event); 
+        return $this->redirectToRoute('app_evenement_index_front', [
+            'evenements' => $evenementRepository->findAll(),
+        ]);
+    }
+
     #[Route('/details', name: 'app_evenement_index_front_details', methods: ['GET'])]
     public function frontindexx(EvenementRepository $evenementRepository): Response
     {
+
         return $this->render('main/details.html.twig', [
             'evenements' => $evenementRepository->findAll(),
         ]);
     }
 
     #[Route('/new', name: 'app_evenement_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EvenementRepository $evenementRepository): Response
+    public function new(
+        Request $request,
+        EvenementRepository $evenementRepository ,
+        UserRepository $userRepository , 
+        MailerInterface $mailer): Response
     {
         $evenement = new Evenement();
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $evenementRepository->save($evenement, true);
-
+            $evenementRepository->save($evenement, true); 
+           //get all users
+            $allUsers = $userRepository->findAll();
+            // notify each user with email
+            foreach ($allUsers as   $value) {
+                $email = (new Email())
+                ->from('symfonyttester@gmail.com')
+                ->to($value->getEmail()) 
+                ->subject('New EVENT !')
+                ->html('<p>We  are happy to let you know  that we added '.$evenement->getNom().' <br> location : '.$evenement->getLocal().' <br> we are waiting!</p>');
+                $mailer->send($email);
+                      }
             return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -65,8 +127,7 @@ class EvenementController extends AbstractController
     }
     #[Route('/user/{id}', name: 'app_evenement_show_front', methods: ['GET'])]
     public function showf(Evenement $evenement): Response
-    {
-        
+    { 
         return $this->render('events/eventDetails.html.twig', [
             'evenement' => $evenement,
         ]);
@@ -74,7 +135,12 @@ class EvenementController extends AbstractController
 
 
     #[Route('/{id}/edit', name: 'app_evenement_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Evenement $evenement, EvenementRepository $evenementRepository): Response
+    public function edit(
+        Request $request,
+         Evenement $evenement,
+          EvenementRepository $evenementRepository,
+          UserRepository $userRepository,
+          MailerInterface $mailer): Response
     {
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
@@ -83,6 +149,18 @@ class EvenementController extends AbstractController
             
             
             $evenementRepository->save($evenement, true);
+
+             //get all users
+             $allUsers = $userRepository->findAll();
+             // notify each user with email
+             foreach ($allUsers as   $value) {
+                 $email = (new Email())
+                 ->from('symfonyttester@gmail.com')
+                 ->to($value->getEmail()) 
+                 ->subject('EVENT '.$evenement->getNom().' updated')
+                 ->html('<p>We  want to let you know  that we updated '.$evenement->getNom().' <br> go check it!</p>');
+                 $mailer->send($email);
+                       }
 
             return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -94,17 +172,33 @@ class EvenementController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_evenement_delete', methods: ['GET'])]
-    public function delete(Request $request, Evenement $evenement, EvenementRepository $evenementRepository): Response
+    public function delete(
+        Request $request,
+         Evenement $evenement,
+          EvenementRepository $evenementRepository , 
+          UserRepository $userRepository,
+          MailerInterface $mailer): Response
     {
          
             $evenementRepository->remove($evenement, true);
-        
-
+            if($evenement->getParticipations()!= null){
+            foreach ($evenement->getParticipations() as   $value) {
+                $email = (new Email())
+                ->from('symfonyttester@gmail.com')
+                ->to($userRepository->findOne($value->getUserId())->getEmail() ) 
+                ->subject('EVENT '.$evenement->getNom().' Canceled')
+                ->html('<p>We  want to let you know  that we canceled '.$evenement->getNom().' </p>');
+                $mailer->send($email);
+                      }
+                    }
         return $this->render('back_office/evenement/index.html.twig', [
             'evenements' => $evenementRepository->findAll(),
         ]);
         
 }
+
+
+
 
 
 }

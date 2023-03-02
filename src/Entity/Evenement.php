@@ -7,7 +7,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Mime\Message;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
@@ -50,10 +49,14 @@ class Evenement
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: Participation::class)]
     private Collection $participations;
 
+    #[ORM\OneToMany(mappedBy: 'evenement', targetEntity: Like::class)]
+    private Collection $likes;
 
+  
     public function __construct()
     {
         $this->participations = new ArrayCollection();
+        $this->likes = new ArrayCollection(); 
     }
 
     Public function __tostring() :string{
@@ -183,6 +186,41 @@ class Evenement
         return $this;
     }
 
+    /**
+     * @return Collection<int, Like>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setEvenement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getEvenement() === $this) {
+                $like->setEvenement(null);
+            }
+        }
+
+        return $this;
+    }
+ 
     
+
+
+
+
+
 
 }
