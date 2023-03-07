@@ -16,8 +16,7 @@ class Participation
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?User $user_id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $test = null;
+ 
 
     #[ORM\ManyToOne(inversedBy: 'participations')]
     private ?Evenement $event = null;
@@ -37,18 +36,6 @@ class Participation
     public function setUserId(?User $user_id): self
     {
         $this->user_id = $user_id;
-
-        return $this;
-    }
-
-    public function getTest(): ?string
-    {
-        return $this->test;
-    }
-
-    public function setTest(string $test): self
-    {
-        $this->test = $test;
 
         return $this;
     }

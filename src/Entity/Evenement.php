@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
 class Evenement
@@ -15,44 +17,103 @@ class Evenement
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("evenements")]
     private ?int $id = null;
     
+
+
+
     #[ORM\Column(length: 255)]
+    #[Groups("evenements")]
     #[assert\NotBlank(message:"Veuillez entrer le nom d'evenement !")]
     private ?string $nom = null;
 
+
+
+
     #[ORM\Column]
+    #[Groups("evenements")]
     #[assert\NotBlank(message:"Veuillez entrer une capacite valide !")]
     private ?int $capacite = null;
 
+
+
+
     #[ORM\Column(length: 255)]
+    #[Groups("evenements")]
     #[assert\NotBlank(message:"Veuillez entrer le nom de local  !")]
     private ?string $local = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    
+
+
+
+
+    #[ORM\Column(type: Types::DATE_MUTABLE ,nullable:true)]
+    #[Groups("evenements")]
     private ?\DateTimeInterface $date = null;
+
+
+
 
     #[ORM\Column(length: 255)]
     #[assert\NotBlank(message:"Veuillez entrer le prix  !")]
+    #[Groups("evenements")]
     private ?string $prix = null;
 
+
+
     #[ORM\ManyToOne(inversedBy: 'event')]
+    #[ORM\JoinColumn(nullable: true)]
+    #[Groups("evenements")]
     private ?Categorie $type = null;
 
+
+
+
+
     #[ORM\Column(length: 255)]
+    #[Groups("evenements")]
     #[assert\NotBlank(message:"Veuillez entrer un description a propos cet évenement  !")]
     private ?string $Description = null;
 
     
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: Participation::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    #[Groups("evenements")]
     private Collection $participations;
 
+
+
+
     #[ORM\OneToMany(mappedBy: 'evenement', targetEntity: Like::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    #[Groups("evenements")]
     private Collection $likes;
 
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function __construct()
     {
         $this->participations = new ArrayCollection();
