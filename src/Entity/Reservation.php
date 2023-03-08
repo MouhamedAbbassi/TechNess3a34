@@ -30,17 +30,14 @@ class Reservation
     #[ORM\JoinColumn]
     private ?User $patient = null;
 
-<<<<<<< HEAD
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $start = null;
-=======
-    #[ORM\OneToOne(mappedBy: 'reservations', cascade: ['persist', 'remove'])]
+     #[ORM\OneToOne(mappedBy: 'reservations', cascade: ['persist', 'remove'])]
     private ?Ordonnance $ordonnance = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     private ?Fiche $Fiche = null;
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
-
+ 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $end = null;
 
@@ -85,8 +82,7 @@ class Reservation
 
         return $this;
     }
-
-<<<<<<< HEAD
+ 
     public function getStart(): ?\DateTimeInterface
     {
         return $this->start;
@@ -102,7 +98,7 @@ class Reservation
             }*/
     
         $this->start = $start;
-=======
+        }
     public function getOrdonnance(): ?Ordonnance
     {
         return $this->ordonnance;
@@ -121,12 +117,11 @@ class Reservation
         }
 
         $this->ordonnance = $ordonnance;
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
-
+ 
         return $this;
     }
 
-<<<<<<< HEAD
+ 
     public function getEnd(): ?\DateTimeInterface
     {
         return $this->end;
@@ -155,7 +150,7 @@ class Reservation
         return $this;
     }
 
-=======
+ 
     public function getFiche(): ?Fiche
     {
         return $this->Fiche;
@@ -167,6 +162,6 @@ class Reservation
 
         return $this;
     }
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
+ 
     
 }
