@@ -30,19 +30,49 @@ class ReservationController extends AbstractController
         ]);
     }
 
-   
-    #[Route('/', name: 'app_reservation_index_admin', methods: ['GET'])]
-    public function index_admin(UserRepository $userRepository,ReservationRepository $reservationRepository): Response
+
+    #[Route('/sort', name: 'app_reservation_index_sorted', methods: ['GET'])]
+    public function index_sorted(UserRepository $userRepository,ReservationRepository $reservationRepository): Response
     {
-       
+        $userp = $this->getUser()->getId();
         return $this->render('reservation/display.html.twig', [
 
-            'reservations' => $reservationRepository->findAll(),
+            'reservations' => $reservationRepository->sort($userp),
            
         ]);
     }
-    
 
+
+
+    #[Route('/calendar', name: 'app_reservation_calendaar')]
+    public function calendar(ReservationRepository $reservationRepository ): Response
+    {
+
+       $events = $reservationRepository->findAll();
+       
+       $rdvs =[];
+foreach($events as $event)
+{
+
+$rdvs[] = [
+
+    'id' =>$event->getId(),
+    'start' =>$event->getStart()->format('Y-m-d H:i:s'),
+    'end' =>$event->getEnd()->format('Y-m-d H:i:s'),
+    'Comment' =>$event->getComment(),
+
+
+];
+
+
+}
+$data = json_encode($rdvs);
+
+
+        return $this->render('reservation/calendar.html.twig' , compact('data'));
+    }
+
+   
     
     #[Route('/s', name: 'app_reservation_specialite', methods: ['GET', 'POST'])]
     public function specialite(SpecialityRepository $specialiteRepository): Response
@@ -69,9 +99,6 @@ class ReservationController extends AbstractController
         $userp->addDoctor($users);
         $reservation = new Reservation();  
 
-
-        
-       
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
 
@@ -106,12 +133,14 @@ class ReservationController extends AbstractController
     }
 
 
+
+
     #[Route('/{id}/ed', name: 'app_reservation_med', methods: ['GET'])]
     public function medbyspe(Speciality $specialite ): Response
     {      
         
         return $this->render('reservation/med.html.twig', [
-  'all' => $specialite,
+            'all' => $specialite,
             'med' => $specialite->getMedecin(),
            
         ]);
@@ -156,4 +185,9 @@ class ReservationController extends AbstractController
 
         return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    
+
+
 }

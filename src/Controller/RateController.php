@@ -9,18 +9,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 use App\Entity\User;
 use App\Entity\Speciality;
-
 use App\Repository\UserRepository;
 use App\Repository\SpecialityRepository;
+use App\Entity\Reservation;
+use App\Form\ReservationType;
+use App\Repository\ReservationRepository;
+
 
 
 #[Route('/rate')]
 class RateController extends AbstractController
 {
-   /* #[Route('/', name: 'app_rate_index', methods: ['GET'])]
+
+    //back admin
+    #[Route('/', name: 'app_rate_index', methods: ['GET'])]
     public function index(RateRepository $rateRepository): Response
     {
         return $this->render('rate/index.html.twig', [
@@ -28,37 +32,56 @@ class RateController extends AbstractController
         ]);
     }
 
-  /*  #[Route('/calcul', name: 'app_rate_calcul', methods: ['GET', 'POST'])]
-    public function calcul(RateRepository $rateRepository,UserRepository $userRepository): Response
-    {   $id=1;
-        $users = $userRepository->findmed($id);
-        $u = $users->getId();
-        $rates = $rateRepository->findRatesMed($u);
-        $x=0;
-      for($i=0;$i<10;$i++)
-      { $x= $x + $rates[$i]->getNote() ;}
+    //front auto apres add
+    #[Route('/calcul', name: 'app_rate_calcul', methods: ['GET', 'POST'])]
+    public function calcul(RateRepository $rateRepository,UserRepository $userRepository ): Response
+    {   
+
+        $all=$userRepository->findAll();
+
+        foreach ($all as &$user) {
+            
+            $u = $user->getId();
+           $rates = $rateRepository->findRatesMed($u);
+   
+           $x=0;
+           $i=1;
+
+           foreach ($rates as &$value) {
+               
+               $x= ($x + $value->getNote())/$i;
+               $i++;
+           }
+
+           $user->setRates($x);
+           $userRepository->save($user, true); }
+
+        
+
        
 
-        $users->setNotefinale($x);
-
-        return $this->redirectToRoute('app_rate_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('patient', [], Response::HTTP_SEE_OTHER);
         
         
-    }*/
-
-   /* #[Route('/new', name: 'app_rate_new', methods: ['GET', 'POST'])]
+    }
+//add front
+    #[Route('/new', name: 'app_rate_new', methods: ['GET', 'POST'])]
     public function new(Request $request, RateRepository $rateRepository ,UserRepository $userRepository): Response
     {
         $rate = new Rate();
-        //$userp = $this->getUser();
+        $int=1;
+        //$meds = $userRepository->tridmed($int);
+
+        
+        $userp = $this->getUser();
         $form = $this->createForm(RateType::class, $rate);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //$rate->setMakeRate($userp);
+            $rate->setMakeRate($userp);
             $rateRepository->save($rate, true);
             
-            return $this->redirectToRoute('app_rate_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_rate_calcul', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('rate/new.html.twig', [
@@ -67,6 +90,8 @@ class RateController extends AbstractController
         ]);
     }
 
+
+    //back admin
     #[Route('/{id}', name: 'app_rate_show', methods: ['GET'])]
     public function show(Rate $rate): Response
     {
@@ -74,7 +99,7 @@ class RateController extends AbstractController
             'rate' => $rate,
         ]);
     }
-
+//***********NO EDIT*******************************
     #[Route('/{id}/edit', name: 'app_rate_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Rate $rate, RateRepository $rateRepository): Response
     {
@@ -93,6 +118,8 @@ class RateController extends AbstractController
         ]);
     }
 
+
+    //back admin
     #[Route('/{id}', name: 'app_rate_delete', methods: ['POST'])]
     public function delete(Request $request, Rate $rate, RateRepository $rateRepository): Response
     {
@@ -101,5 +128,5 @@ class RateController extends AbstractController
         }
 
         return $this->redirectToRoute('app_rate_index', [], Response::HTTP_SEE_OTHER);
-    }*/
+    }
 }

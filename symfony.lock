@@ -38,8 +38,40 @@
             "./migrations/.gitignore"
         ]
     },
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+    "lexik/jwt-authentication-bundle": {
+        "version": "2.18",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.5",
+            "ref": "5b2157bcd5778166a5696e42f552ad36529a07a6"
+        },
+        "files": [
+            "./config/packages/lexik_jwt_authentication.yaml"
+        ]
     },
+=======
+    "google/recaptcha": {
+        "version": "1.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.1",
+            "ref": "e5a4aa21f2e98d7440ae9aab6b56e307f99dd084"
+        },
+        "files": [
+            "./config/packages/google_recaptcha.yaml"
+        ]
+    },
+    "gregwar/captcha-bundle": {
+        "version": "v1.0.0"
+>>>>>>> 13f26b7c7f24cbc23d39915dc56ad7bf73a688db
+    },
+>>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
     "phpunit/phpunit": {
         "version": "9.5",
         "recipe": {
@@ -327,6 +359,15 @@
     },
     "symfonycasts/verify-email-bundle": {
         "version": "v1.13.0"
+    },
+    "tattali/calendar-bundle": {
+        "version": "1.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.1",
+            "ref": "0c643e17b5340747b35c2c75e11727fa31bfa9bb"
+        }
     },
     "twig/extra-bundle": {
         "version": "v3.5.0"

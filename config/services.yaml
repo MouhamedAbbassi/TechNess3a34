@@ -8,8 +8,12 @@ parameters:
 
 
 services:
+<<<<<<< HEAD
+    App\EventSubscriber\CalendarSubscriber: 
+=======
     App\Service\PdfGenerator:
         arguments: []
+>>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.

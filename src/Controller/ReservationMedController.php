@@ -31,7 +31,7 @@ class ReservationMedController extends AbstractController
 
 
 
-    #[Route('/{id}', name: 'app_reservation_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_reservation_delete_bymed', methods: ['POST'])]
     public function delete(Request $request, Reservation $reservation, ReservationRepository $reservationRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {

@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
@@ -17,24 +18,31 @@ class Reservation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
 
+      
     
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn]
     private ?User $users = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservpat')]
+    #[ORM\JoinColumn]
     private ?User $patient = null;
 
-    #[ORM\OneToOne(mappedBy: 'reservations', cascade: ['persist', 'remove'])]
+     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $start = null;
+     #[ORM\OneToOne(mappedBy: 'reservations', cascade: ['persist', 'remove'])]
     private ?Ordonnance $ordonnance = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     private ?Fiche $Fiche = null;
+ 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $end = null;
 
+    #[ORM\Column(length: 255,nullable: true)]
+    private ?string $Comment = null;
 
 
     public function getId(): ?int
@@ -42,17 +50,12 @@ class Reservation
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
+    public function setId($id): self
+    {$this->id = $id;
+        return $this ;
     }
 
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
-
-        return $this;
-    }
+    
 
     
 
@@ -79,7 +82,23 @@ class Reservation
 
         return $this;
     }
+ 
+    public function getStart(): ?\DateTimeInterface
+    {
+        return $this->start;
+    }
 
+    public function setStart( ?\DateTimeInterface $start): self
+    {
+        
+        
+            /*if (!$start instanceof DateTimeInterface) {
+                // Convertit la chaîne de caractères en objet DateTimeInterface
+                $start = new DateTime($start);
+            }*/
+    
+        $this->start = $start;
+        }
     public function getOrdonnance(): ?Ordonnance
     {
         return $this->ordonnance;
@@ -98,10 +117,40 @@ class Reservation
         }
 
         $this->ordonnance = $ordonnance;
+ 
+        return $this;
+    }
+
+ 
+    public function getEnd(): ?\DateTimeInterface
+    {
+        return $this->end;
+    }
+
+    public function setEnd(?\DateTimeInterface $end): self
+    {
+        /*if (!$end instanceof DateTimeInterface) {
+            // Convertit la chaîne de caractères en objet DateTimeInterface
+            $end = new DateTime($end);
+        }*/
+        $this->end = $end;
 
         return $this;
     }
 
+    public function getComment(): ?string
+    {
+        return $this->Comment;
+    }
+
+    public function setComment(string $Comment): self
+    {
+        $this->Comment = $Comment;
+
+        return $this;
+    }
+
+ 
     public function getFiche(): ?Fiche
     {
         return $this->Fiche;
@@ -113,5 +162,6 @@ class Reservation
 
         return $this;
     }
+ 
     
 }
