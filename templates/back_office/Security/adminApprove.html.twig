@@ -34,14 +34,27 @@
                     <div class="kt-portlet">
 
                       <div class="row" >
-                        <div  class="kt-portlet__body">
-                            {{ form_start(form) }}
+                          {% if users.licenceNumero  %}
+                             <div >
+                                <h4 style="margin-left: 100px;margin-top: 30px">  Licence number of {{ users.prenom }}-{{ users.nom }} </h4>
+                                 <h3 style="margin-left: 230px"> {{ users.licenceNumero }}</h3>
+                                 <div style="margin-left: 10px" class="kt-portlet__body">
+                                     {{ form_start(form) }}
+                                    <h5>
+                                        {{ form_row(form.status ,{'label': "Check to approve"}) }}
+                                    </h5>
+                                     {{ form_end(form) }}
+                                 </div>
+                             </div>
+                          {% else %}
+                             <div style="margin-left: 20px">
+                                <h3 style="margin-left: 20px; margin-top: 50px;margin-right: 20px ; margin-bottom: 50px">
+                                    {{ users.prenom }}-{{ users.nom }} account is not verfied
+                                </h3>
 
-                            {{ form_row(form.status ,{'label': "Verifer Medecin"}) }}
+                             </div>
+                          {% endif %}
 
-                            {{ form_end(form) }}
-
-                        </div>
                       </div>
 
                     </div>

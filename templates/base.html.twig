@@ -20,7 +20,7 @@
                         <div class="col-lg-4">
                             <ul class="header-right-content">
                                 <li>
-                                    <i class="ri-home-6-line"></i>
+                                    <i class="ri-user-follow-fill"></i>
                                     {%  if is_granted('ROLE_MEDECIN') %}
                                     <a href="{{path('medecin')}}">Profile</a>
                                     {% elseif is_granted('ROLE_PATIENT') %}
@@ -80,8 +80,12 @@
                                             <li class="nav-item">
                                                 {% if is_granted('ROLE_PATIENT') %}
                                                 <a href="{{path('app_reservation_index')}}" class="nav-link">Consultations</a>
+                                                    <a href="{{path('app_ordonnance_patient_index')}}" class="nav-link">mes ordonnance</a>
                                                 {% elseif is_granted('ROLE_MEDECIN') %}
-                                                <a href="{{path('app_reservation_index_med')}}" class="nav-link">Consultations</a>
+
+                                                    <a href="{{path('app_reservation_index_med')}}" class="nav-link">Consultations</a>
+                                                    <a href="{{path('app_ordonnance_index')}}" class="nav-link">Liste des Ordonnance</a>
+                                                    <a href="{{path('app_doctor_patient_index')}}" class="nav-link">Liste des Patient</a>
                                                 {% endif %}
                                             </li>
                                             <li class="nav-item">
@@ -312,11 +316,11 @@
                     <div class="col-lg-4">
                         <ul class="header-right-content">
                             <li>
-                                <i class="ri-user-3-line"></i>
+                                <i class="ri-login-box-line"></i>
                                 <a href="{{path('login')}}">Login</a>
                             </li>
                             <li>
-                                <i class="ri-login-box-line"></i>
+                                <i class="ri-user-follow-line"></i>
                                 <a href="{{path('register')}}">Signup</a>
                             </li>
 
@@ -377,6 +381,7 @@
         {% endblock %}
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
 
+<<<<<<< HEAD
         {% block javascripts %}
             <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery.min.js"></script>
             <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
@@ -395,6 +400,9 @@
           
             
             {% endblock %}
+=======
+
+>>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
     </head>
     <body>
         {% block body %}
@@ -408,7 +416,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="single-footer-widget">
                         <a href="index.html" class="logo">
-                            <img src="{{ asset('frontOffice/assets/images/DocNet.png') }}" style="max-width: 40%" class="main-logo" alt="logo">
+                            <img href="{{path('home')}}" src="{{ asset('frontOffice/assets/images/DocNet.png') }}" style="max-width: 40%" class="main-logo" alt="logo">
                         </a>
                         <p>Connect for your health , with DocNet.</p>
                        
@@ -560,4 +568,22 @@
         <i class="ri-arrow-up-s-fill"></i>
     </div>
     <!-- End Go Top Area --></footer>
+    {% block javascript %}
+     <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="{{ asset('frontOffice/assets/js/jquery.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/bootstrap.bundle.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/choicePicker.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/meanmenu.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/owl.carousel.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/swiper-bundle.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/appear.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/odometer.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/wow.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/jspdf.debug.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/form-validator.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/contact-form-script.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/ajaxchimp.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/custom.js') }}"></script>
+
+        {% endblock %}
 </html>

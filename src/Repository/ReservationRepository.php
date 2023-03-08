@@ -60,6 +60,16 @@ class ReservationRepository extends ServiceEntityRepository
        ->getResult();
    
     }
+    public function getReservationByFiche(int $ficheId)
+    {
+        return $this->createQueryBuilder('r')
+            ->innerJoin('r.Fiche','f')
+            ->where('f.id = :id')
+            ->setParameter('id', $ficheId)
+            ->orderBy('r.date', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 
     public function sort($id): array
     {

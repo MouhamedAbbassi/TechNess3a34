@@ -29,7 +29,7 @@ class Medicament
     #[Assert\NotBlank(message:"Nb dose est obligatoire")]
     private ?int $Nb_dose = null;
 
-    
+
 
 
     #[ORM\Column]
@@ -47,10 +47,14 @@ class Medicament
     #[ORM\ManyToMany(targetEntity: Pharmacie::class, inversedBy: 'medicaments')]
     private Collection $id_pharmacie;
 
+    #[ORM\OneToMany(mappedBy: 'medicament', targetEntity: OrdonnanceMedicament::class)]
+    private Collection $ordonnanceMedicaments;
 
     public function __construct()
     {
         $this->id_pharmacie = new ArrayCollection();
+        $this->ordonnances = new ArrayCollection();
+        $this->ordonnanceMedicaments = new ArrayCollection();
     }
    
 
@@ -143,8 +147,50 @@ class Medicament
         return $this;
     }
 
-    
-    
-    
+    public function getOrdonnance(): ?Ordonnance
+    {
+        return $this->ordonnance;
+    }
+
+    public function setOrdonnance(?Ordonnance $ordonnance): self
+    {
+        $this->ordonnance = $ordonnance;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrdonnanceMedicament>
+     */
+    public function getOrdonnanceMedicaments(): Collection
+    {
+        return $this->ordonnanceMedicaments;
+    }
+
+    public function addOrdonnanceMedicament(OrdonnanceMedicament $ordonnanceMedicament): self
+    {
+        if (!$this->ordonnanceMedicaments->contains($ordonnanceMedicament)) {
+            $this->ordonnanceMedicaments->add($ordonnanceMedicament);
+            $ordonnanceMedicament->setMedicament($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrdonnanceMedicament(OrdonnanceMedicament $ordonnanceMedicament): self
+    {
+        if ($this->ordonnanceMedicaments->removeElement($ordonnanceMedicament)) {
+            // set the owning side to null (unless already changed)
+            if ($ordonnanceMedicament->getMedicament() === $this) {
+                $ordonnanceMedicament->setMedicament(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string {
+        return $this->getNom();
+    }
     
 }

@@ -5,9 +5,15 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     image_directory: '%kernel.project_dir%/public/uploads'
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
 
 services:
+<<<<<<< HEAD
     App\EventSubscriber\CalendarSubscriber: 
+=======
+    App\Service\PdfGenerator:
+        arguments: []
+>>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.

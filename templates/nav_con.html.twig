@@ -79,6 +79,7 @@
                                                 <a href="{{path('app_reservation_index')}}" class="nav-link">Consultations</a>
                                             </li>
                                             <li class="nav-item">
+<<<<<<< HEAD
                                                 {% if is_granted('ROLE_PATIENT') %}
                                                 <a  href="{{path('app_rate_new')}}" class="nav-link">Rate a doctor</a>
                                                 {% elseif is_granted('ROLE_MEDECIN') %}
@@ -87,6 +88,9 @@
                                             </li>
                                             <li class="nav-item">
                                                 <a href="department-orthopedics.html" class="nav-link">Department Orthopedics</a>
+=======
+                                                <a href="{{path('app_ordonnance_patient_index')}}" class="nav-link">mes ordonnance</a>
+>>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
                                             </li>
                                             <li class="nav-item">
                                                 <a href="find-a-doctor.html" class="nav-link">Find A Doctor</a>

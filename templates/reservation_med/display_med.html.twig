@@ -51,6 +51,11 @@
                                            <button class="default-btn me-3">Delete</button>
                                         </form>
                                     </div> </td>
+                                <td>
+                                    <form  method="post" action="{{ path('app_ordonnance_new', {'id': reservation.id}) }}">
+                                        <button class="default-btn ">Ordonnance</button>
+                                    </form>
+                                </td>
                                
                             </tr>
                         {% else %}

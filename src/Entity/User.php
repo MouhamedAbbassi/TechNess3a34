@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Entity;
-
-use App\Repository\UserRepository;
+ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,6 +9,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -86,15 +86,49 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?bool $status = null;
 
     #[ORM\Column(nullable: true)]
+<<<<<<< HEAD
     private ?float $rates = null;
 
+=======
+    private ?float $progress = null;
+>>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $baned = null;
+
+    #[ORM\OneToMany(mappedBy: 'doctor', targetEntity: Ordonnance::class)]
+    private Collection $ordonnances;
+
+    #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Ordonnance::class)]
+    private Collection $ordPatients;
+
+    #[ORM\OneToMany(mappedBy: 'doctor', targetEntity: Fiche::class)]
+    private Collection $ficheDoctors;
+
+    #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Fiche::class)]
+    private Collection $fiches;
+
+    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'doctors')]
+    private Collection $patients;
+
+    #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'patients')]
+    private Collection $doctors;
 
     public function __construct()
     {
         $this->speciality = null;
         $this->reservpat = new ArrayCollection();
+<<<<<<< HEAD
         
+=======
+        $this->rates = new ArrayCollection();
+        $this->ordonnances = new ArrayCollection();
+        $this->ordPatients = new ArrayCollection();
+        $this->ficheDoctors = new ArrayCollection();
+        $this->fiches = new ArrayCollection();
+        $this->patients = new ArrayCollection();
+        $this->doctors = new ArrayCollection();
+>>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
     }
 
 
@@ -413,4 +447,203 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+<<<<<<< HEAD
+=======
+    public function getProgress(): ?float
+    {
+        return $this->progress;
+    }
+
+    public function setProgress(?float $progress): self
+    {
+        $this->progress = $progress;
+
+        return $this;
+    }
+
+    public function getBaned(): ?string
+    {
+        return $this->baned;
+    }
+
+    public function setBaned(?string $baned): self
+    {
+        $this->baned = $baned;
+
+        return $this;
+    }
+    /**
+     * @return Collection<int, Ordonnance>
+     */
+    public function getOrdonnances(): Collection
+    {
+        return $this->ordonnances;
+    }
+
+    public function addOrdonnance(Ordonnance $ordonnance): self
+    {
+        if (!$this->ordonnances->contains($ordonnance)) {
+            $this->ordonnances->add($ordonnance);
+            $ordonnance->setDoctor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrdonnance(Ordonnance $ordonnance): self
+    {
+        if ($this->ordonnances->removeElement($ordonnance)) {
+            // set the owning side to null (unless already changed)
+            if ($ordonnance->getDoctor() === $this) {
+                $ordonnance->setDoctor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ordonnance>
+     */
+    public function getOrdPatients(): Collection
+    {
+        return $this->ordPatients;
+    }
+
+    public function addOrdPatient(Ordonnance $ordPatient): self
+    {
+        if (!$this->ordPatients->contains($ordPatient)) {
+            $this->ordPatients->add($ordPatient);
+            $ordPatient->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrdPatient(Ordonnance $ordPatient): self
+    {
+        if ($this->ordPatients->removeElement($ordPatient)) {
+            // set the owning side to null (unless already changed)
+            if ($ordPatient->getPatient() === $this) {
+                $ordPatient->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Fiche>
+     */
+    public function getFicheDoctors(): Collection
+    {
+        return $this->ficheDoctors;
+    }
+
+    public function addFicheDoctor(Fiche $ficheDoctor): self
+    {
+        if (!$this->ficheDoctors->contains($ficheDoctor)) {
+            $this->ficheDoctors->add($ficheDoctor);
+            $ficheDoctor->setDoctor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFicheDoctor(Fiche $ficheDoctor): self
+    {
+        if ($this->ficheDoctors->removeElement($ficheDoctor)) {
+            // set the owning side to null (unless already changed)
+            if ($ficheDoctor->getDoctor() === $this) {
+                $ficheDoctor->setDoctor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Fiche>
+     */
+    public function getFiches(): Collection
+    {
+        return $this->fiches;
+    }
+
+    public function addFich(Fiche $fich): self
+    {
+        if (!$this->fiches->contains($fich)) {
+            $this->fiches->add($fich);
+            $fich->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFich(Fiche $fich): self
+    {
+        if ($this->fiches->removeElement($fich)) {
+            // set the owning side to null (unless already changed)
+            if ($fich->getPatient() === $this) {
+                $fich->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getPatients(): Collection
+    {
+        return $this->patients;
+    }
+
+    public function addPatient(self $patient): self
+    {
+        if (!$this->patients->contains($patient)) {
+            $this->patients->add($patient);
+        }
+
+        return $this;
+    }
+
+    public function removePatient(self $patient): self
+    {
+        $this->patients->removeElement($patient);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getDoctors(): Collection
+    {
+        return $this->doctors;
+    }
+
+    public function addDoctor(self $doctor): self
+    {
+        if (!$this->doctors->contains($doctor)) {
+            $this->doctors->add($doctor);
+            $doctor->addPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDoctor(self $doctor): self
+    {
+        if ($this->doctors->removeElement($doctor)) {
+            $doctor->removePatient($this);
+        }
+
+        return $this;
+    }
+
+
+
+>>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
 }

@@ -100,4 +100,24 @@ public function findmed($value): ?User
     ->getOneOrNullResult();
 
  }
+    public function findOneByNumero($value): ?User
+    {
+        return $this->createQueryBuilder('u')
+            ->select('u')
+            ->andWhere('u.numero = :numero')
+            ->setParameter('numero', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+    public function findOneBySalt($value): User
+    {
+        return $this->createQueryBuilder('u')
+            ->select('u')
+            ->andWhere('u.reset_token = :reset_token')
+            ->setParameter('reset_token', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 }

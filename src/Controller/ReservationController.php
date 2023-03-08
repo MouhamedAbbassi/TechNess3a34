@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Fiche;
 use App\Entity\Reservation;
 use App\Entity\User;
 use App\Entity\Speciality;
 use App\Form\ReservationType;
+use App\Repository\FicheRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\UserRepository;
 use App\Repository\SpecialityRepository;
@@ -87,18 +89,35 @@ $data = json_encode($rdvs);
 
 
     #[Route('/{id}/new', name: 'app_reservation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ReservationRepository $reservationRepository, UserRepository $userRepository ,$id): Response
+    public function new(Request $request, ReservationRepository $reservationRepository, UserRepository $userRepository ,$id,FicheRepository $ficheRepository): Response
     {    
 
         
         $users = $userRepository->findmed($id);
         $userp = $this->getUser();
+        $users->addPatient($userp);
+        $userp->addDoctor($users);
         $reservation = new Reservation();  
 
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $fiche = $ficheRepository->findOneBy([
+                'patient' => $userp,
+                'doctor' => $users
+            ]);
+            if ($fiche) {
+                $fiche->addReservation($reservation);
+                $reservation->setFiche($fiche);
+            } else {
+                $fiche = new Fiche();
+                $fiche->setPatient($userp)
+                    ->setDoctor($users)
+                    ->addReservation($reservation);
+                $reservation->setFiche($fiche);
+                $ficheRepository->save($fiche);
+            }
             $reservation->setUsers($users); 
             $reservation->setPatient($userp);
             $reservationRepository->save($reservation, true);

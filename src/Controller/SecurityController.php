@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\NewPasswordType;
+use App\Form\ResetPasswordType;
+use App\Form\VerificationCodeFormType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Form\ForgetPasswordType;
 use App\Form\ModifierImageType;
@@ -19,6 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -26,6 +30,7 @@ use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\LoginLink\LoginLinkHandlerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Twilio\Rest\Client;
 
 class SecurityController extends AbstractController
 {
@@ -62,7 +67,6 @@ class SecurityController extends AbstractController
                 ->subject('Login Check')
                 ->text('verify link '.$LoginLinkDetails->getUrl());
             $mailer->send($email);
-
         }
         return new Response('checkLogin');
     }
@@ -70,7 +74,6 @@ class SecurityController extends AbstractController
     #[Route(path: '/forgetPassword', name: 'forgetPassword')]
     public function ForgetPassword(Request $request, UserRepository $user, MailerInterface $mailer, TokenGeneratorInterface $tokenGenerator): Response
     {
-
         $form = $this->createForm(ForgetPasswordType::class);
         $form->handleRequest($request);
 
@@ -134,16 +137,12 @@ class SecurityController extends AbstractController
     }
     #[Route('modifierImage/{id}', name: 'modifierImage')]
     public function modifierImage(ManagerRegistry $doctrine,$id,Request $req,SluggerInterface $slugger,User $user,): Response {
-
         $form = $this->createForm(ModifierImageType::class,$user);
-
-
         $form->handleRequest($req);
-
         if ($form->isSubmitted() && $form->isValid()) {
 
-            /** @var UploadedFile $eventImage */
-            $eventImage = $form->get('image')->getData();
+                /** @var UploadedFile $eventImage */
+                $eventImage = $form->get('image')->getData();
 
             // this condition is needed because the 'eventImage' field is not required
             // so the Image file must be processed only when a file is uploaded
@@ -225,4 +224,108 @@ class SecurityController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('listPatient');
     }
+
+    /**
+     * @throws \Twilio\Exceptions\ConfigurationException
+     * @throws \Twilio\Exceptions\TwilioException
+     * @throws \Exception
+     */
+    #[Route(path: '/resetPassword', name: 'resetPassword')]
+    public function resetPassword(Request $request, UserRepository $user, TokenGeneratorInterface $tokenGenerator): Response
+    {
+        $form = $this->createForm(ResetPasswordType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $donnees = $form->getData();
+
+
+            $recevier= $user->findOneByNumero($donnees->getNumero());
+            $idsms = $recevier->getId();
+            $tokensalt = bin2hex(random_bytes(2));
+
+            try {
+                $recevier->setResetToken($tokensalt);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($recevier);
+                $entityManager->flush();
+            } catch (\Exception $e) {
+                $this->addFlash('warning', $e->getMessage());
+
+                return $this->redirectToRoute('resetPassword');
+            }
+            $sid = 'ACe0d39e374a4b33c50217f1c834d14a13';
+            $token = '5e930d060e34882e4131bc1600ad5248';
+            $client = new Client($sid, $token);
+
+            $client->messages->create(
+            // the number you'd like to send the message to
+                $recevier->getNumero(),
+                [
+                    // A Twilio phone number you purchased at twilio.com/console
+                    'from' => '+15076093506',
+                    // the body of the text message you'd like to send
+                    'body' => 'Your reset token is :' .$tokensalt
+                ]
+            );
+
+            return $this->redirectToRoute('code_app',['idsms' => $idsms]);
+        }
+        return $this->render('main/resetPassword.html.twig',
+            ['emailForm' => $form->createView()]);
+    }
+    #[Route(path: '/verificationCode/{idsms}', name: 'code_app')]
+    public function VerificationCode(Request $request, UserRepository $user,ManagerRegistry $doctrine,$idsms): Response
+    {
+
+        $form = $this->createForm(VerificationCodeFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $donnees = $form->getData();
+            $recevier= $user->findOneBySalt($donnees->getResetToken());
+
+            try {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($recevier);
+                $entityManager->flush();
+            } catch (\Exception $e) {
+                $this->addFlash('warning', $e->getMessage());
+
+                return $this->redirectToRoute('resetPassword');
+            }
+
+            return $this->redirectToRoute('newPassword',['idsms' => $idsms]);
+        }
+        return $this->render('main/verificationCode.html.twig',
+            ['emailForm' => $form->createView()]);
+    }
+    #[Route('newPassword/{idsms}', name: 'newPassword')]
+    public function newPassword(ManagerRegistry $doctrine,$idsms,Request $req , UserPasswordHasherInterface $userPasswordHasher): Response {
+
+        $em = $doctrine->getManager();
+        $user = $doctrine->getRepository(User::class)->find($idsms);
+        $form = $this->createForm(NewPasswordType::class,$user);
+        $form->handleRequest($req);
+        if($form->isSubmitted())
+        {
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('password')->getData()
+                )
+            );
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute('login');
+
+        }
+
+        return $this->renderForm('main/newPassword.html.twig',['form'=>$form]);
+
+    }
+
+
 }

@@ -3,26 +3,6 @@
 
 <body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--fixed kt-subheader--enabled kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-page--loading">
 <!-- begin:: Page -->
-<div  class="kt-grid kt-grid--hor kt-grid--root">
-    <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
-
-        <!-- begin:: Aside -->
-        <button class="kt-aside-close " id="kt_aside_close_btn"><i class="la la-close"></i></button>
-
-        <!-- end:: Aside -->
-        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
-
-            <!-- begin:: Header -->
-
-            <!-- end:: Header -->
-            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
-
-                <!-- begin:: Content Head -->
-
-                <!-- end:: Content Head -->
-
-                <!-- begin:: Content -->
-                <div style="margin-right: 300px" class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
 
                     <!--begin:: Widgets/Applications/User/Profile3-->
                     {% for u in user %}
@@ -45,25 +25,27 @@
                                         <div class="kt-widget__head">
                                             <a href="#" class="kt-widget__username">
                                                 {{u.nom}}-{{u.prenom}}
-
-
-                                </a>
+                                            </a>
                                             <div class="kt-widget__action">
 
                                                 {% if u.status == null %}
                                                 <a href="{{path('adminApprove',{'id':u.id})}}" type="button" class="btn btn-label-success btn-sm btn-upper">Approve</a>&nbsp;
-                                             {% endif   %}
+                                                {% endif %}
                                                 {% if u.status %}
-
                                                     <button  type="button" class="btn btn-label-success btn-sm btn-upper">
-                                                        Approved-
                                                         <i class="flaticon2-correct kt-font-success"></i>
+                                                        Approved
                                                     </button>&nbsp;
+                                                {% endif %}
 
+                                                {% if u.baned == null %}
+                                                 <a type="button" href="{{path('adminBan',{'id':u.id})}}" class="btn btn-label-danger">Ban</a>&nbsp;
+                                                {% endif %}
 
-                                                {% endif   %}
-                                                 <a type="button" class="btn btn-label-danger">Ban</a>&nbsp;
-                                             </div>
+                                                 {% if u.baned %}
+                                                  <a type="button" href="{{path('adminUnban',{'id':u.id})}}" class="btn btn-label-danger">Unaned</a>&nbsp;
+                                                 {% endif %}
+                                                     </div>
                                         </div>
                                         <div class="kt-widget__subhead">
                                             <a href="#"><i class="flaticon2-new-email"></i>{{u.email}}</a><br><br>
@@ -79,10 +61,10 @@
                                                     Progress
                                                 </div>
                                                 <div class="progress" style="height: 5px;width: 100%;">
-                                                    <div class="progress-bar kt-bg-success" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <div class="progress-bar kt-bg-success" role="progressbar" style="width:{{u.progress}}%;" aria-valuenow="{{u.progress}}" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
                                                 <div class="kt-widget__stats">
-                                                    78%
+                                                    {{u.progress}}%
                                                 </div>
                                             </div>
                                         </div>
@@ -129,87 +111,6 @@
                     </div>
                     {% endif %}
                     {% endfor %}
-
-
-
-                    <!--Begin::pagination-->
-                    <div class="row">
-                        <div class="col-xl-12">
-
-                            <!--begin:: Components/Pagination/Default-->
-                            <div class="kt-portlet">
-                                <div class="kt-portlet__body">
-
-                                    <!--begin: Pagination-->
-                                    <div class="kt-pagination kt-pagination--brand">
-                                        <ul class="kt-pagination__links">
-                                            <li class="kt-pagination__link--first">
-                                                <a href="#"><i class="fa fa-angle-double-left kt-font-brand"></i></a>
-                                            </li>
-                                            <li class="kt-pagination__link--next">
-                                                <a href="#"><i class="fa fa-angle-left kt-font-brand"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#">...</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">29</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">30</a>
-                                            </li>
-                                            <li class="kt-pagination__link--active">
-                                                <a href="#">31</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">32</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">33</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">34</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">...</a>
-                                            </li>
-                                            <li class="kt-pagination__link--prev">
-                                                <a href="#"><i class="fa fa-angle-right kt-font-brand"></i></a>
-                                            </li>
-                                            <li class="kt-pagination__link--last">
-                                                <a href="#"><i class="fa fa-angle-double-right kt-font-brand"></i></a>
-                                            </li>
-                                        </ul>
-                                        <div class="kt-pagination__toolbar">
-                                            <select class="form-control kt-font-brand" style="width: 60px">
-                                                <option value="10">10</option>
-                                                <option value="20">20</option>
-                                                <option value="30">30</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select>
-                                            <span class="pagination__desc">
-														Displaying 10 of 230 records
-													</span>
-                                        </div>
-                                    </div>
-
-                                    <!--end: Pagination-->
-                                </div>
-                            </div>
-
-                            <!--end:: Components/Pagination/Default-->
-                        </div>
-                    </div>
-                    <!--End::pagination-->
-                </div>
-
-                <!-- end:: Content -->
-            </div>
-
-        </div>
-    </div>
-</div>
 
 <!-- end:: Page -->
 
