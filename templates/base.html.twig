@@ -78,8 +78,12 @@
                                             <li class="nav-item">
                                                 {% if is_granted('ROLE_PATIENT') %}
                                                 <a href="{{path('app_reservation_index')}}" class="nav-link">Consultations</a>
+                                                    <a href="{{path('app_ordonnance_patient_index')}}" class="nav-link">mes ordonnance</a>
                                                 {% elseif is_granted('ROLE_MEDECIN') %}
-                                                <a href="{{path('app_reservation_index_med')}}" class="nav-link">Consultations</a>
+
+                                                    <a href="{{path('app_reservation_index_med')}}" class="nav-link">Consultations</a>
+                                                    <a href="{{path('app_ordonnance_index')}}" class="nav-link">Liste des Ordonnance</a>
+                                                    <a href="{{path('app_doctor_patient_index')}}" class="nav-link">Liste des Patient</a>
                                                 {% endif %}
                                             </li>
                                             <li class="nav-item">
