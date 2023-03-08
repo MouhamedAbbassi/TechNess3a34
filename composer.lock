@@ -4,14 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    "content-hash": "b562fd5d1ff04bd08a3e01dea81a1c65",
-=======
+
     "content-hash": "b0588ec9219bd6c2fce3d3e4903f4d1b",
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
->>>>>>> 13f26b7c7f24cbc23d39915dc56ad7bf73a688db
+
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1783,9 +1778,6 @@
             "time": "2023-02-15T13:44:18+00:00"
         },
         {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
             "name": "laminas/laminas-code",
             "version": "4.7.1",
             "source": {
@@ -1813,11 +1805,9 @@
             },
             "suggest": {
                 "doctrine/annotations": "Doctrine\\Common\\Annotations >=1.0 for annotation features",
-                "laminas/laminas-stdlib": "Laminas\\Stdlib component"
-=======
+                "laminas/laminas-stdlib": "Laminas\\Stdlib component",
             "name": "masterminds/html5",
             "version": "2.7.6",
->>>>>>> 13f26b7c7f24cbc23d39915dc56ad7bf73a688db
             "source": {
                 "type": "git",
                 "url": "https://github.com/Masterminds/html5-php.git",
@@ -1837,7 +1827,6 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8.35 || ^5.7.21 || ^6 || ^7"
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
             },
             "type": "library",
             "extra": {
@@ -1871,7 +1860,6 @@
                     "email": "goetas@gmail.com"
                 }
             ],
-<<<<<<< HEAD
             "time": "2022-11-21T01:32:31+00:00"
         },
         {
@@ -2128,24 +2116,6 @@
                 }
             ],
             "time": "2023-02-13T12:30:12+00:00"
-=======
-            "description": "An HTML5 parser and serializer.",
-            "homepage": "http://masterminds.github.io/html5-php",
-            "keywords": [
-                "HTML5",
-                "dom",
-                "html",
-                "parser",
-                "querypath",
-                "serializer",
-                "xml"
-            ],
-            "support": {
-                "issues": "https://github.com/Masterminds/html5-php/issues",
-                "source": "https://github.com/Masterminds/html5-php/tree/2.7.6"
-            },
-            "time": "2022-08-18T16:18:26+00:00"
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
         },
         {
             "name": "mercuryseries/flashy-bundle",
@@ -2296,7 +2266,6 @@
             "time": "2023-02-06T13:44:46+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "namshi/jose",
             "version": "7.2.3",
             "source": {
@@ -2327,40 +2296,15 @@
             "suggest": {
                 "ext-openssl": "Allows to use OpenSSL as crypto engine.",
                 "phpseclib/phpseclib": "Allows to use Phpseclib as crypto engine, use version ^2.0."
-=======
-            "name": "phenx/php-font-lib",
-            "version": "0.5.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dompdf/php-font-lib.git",
-                "reference": "dd448ad1ce34c63d09baccd05415e361300c35b4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/php-font-lib/zipball/dd448ad1ce34c63d09baccd05415e361300c35b4",
-                "reference": "dd448ad1ce34c63d09baccd05415e361300c35b4",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "^3 || ^4 || ^5"
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-<<<<<<< HEAD
                     "Namshi\\JOSE\\": "src/Namshi/JOSE/"
-=======
-                    "FontLib\\": "src/FontLib"
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-<<<<<<< HEAD
                 "MIT"
             ],
             "authors": [
@@ -2387,69 +2331,6 @@
                 "source": "https://github.com/namshi/jose/tree/master"
             },
             "time": "2016-12-05T07:27:31+00:00"
-=======
-                "LGPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Ménager",
-                    "email": "fabien.menager@gmail.com"
-                }
-            ],
-            "description": "A library to read, parse, export and make subsets of different types of font files.",
-            "homepage": "https://github.com/PhenX/php-font-lib",
-            "support": {
-                "issues": "https://github.com/dompdf/php-font-lib/issues",
-                "source": "https://github.com/dompdf/php-font-lib/tree/0.5.4"
-            },
-            "time": "2021-12-17T19:44:54+00:00"
-        },
-        {
-            "name": "phenx/php-svg-lib",
-            "version": "0.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dompdf/php-svg-lib.git",
-                "reference": "76876c6cf3080bcb6f249d7d59705108166a6685"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/php-svg-lib/zipball/76876c6cf3080bcb6f249d7d59705108166a6685",
-                "reference": "76876c6cf3080bcb6f249d7d59705108166a6685",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": "^7.1 || ^8.0",
-                "sabberworm/php-css-parser": "^8.4"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Svg\\": "src/Svg"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Ménager",
-                    "email": "fabien.menager@gmail.com"
-                }
-            ],
-            "description": "A library to read, parse and export to PDF SVG files.",
-            "homepage": "https://github.com/PhenX/php-svg-lib",
-            "support": {
-                "issues": "https://github.com/dompdf/php-svg-lib/issues",
-                "source": "https://github.com/dompdf/php-svg-lib/tree/0.5.0"
-            },
-            "time": "2022-09-06T12:16:56+00:00"
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -2960,7 +2841,6 @@
             "time": "2021-07-14T16:41:46+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "sensio/framework-extra-bundle",
             "version": "v6.2.10",
             "source": {
@@ -2975,75 +2855,6 @@
                 "shasum": ""
             },
             "require": {
-=======
-            "name": "sabberworm/php-css-parser",
-            "version": "8.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sabberworm/PHP-CSS-Parser.git",
-                "reference": "e41d2140031d533348b2192a83f02d8dd8a71d30"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sabberworm/PHP-CSS-Parser/zipball/e41d2140031d533348b2192a83f02d8dd8a71d30",
-                "reference": "e41d2140031d533348b2192a83f02d8dd8a71d30",
-                "shasum": ""
-            },
-            "require": {
-                "ext-iconv": "*",
-                "php": ">=5.6.20"
-            },
-            "require-dev": {
-                "codacy/coverage": "^1.4",
-                "phpunit/phpunit": "^4.8.36"
-            },
-            "suggest": {
-                "ext-mbstring": "for parsing UTF-8 CSS"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Sabberworm\\CSS\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Raphael Schweikert"
-                }
-            ],
-            "description": "Parser for CSS Files written in PHP",
-            "homepage": "https://www.sabberworm.com/blog/2010/6/10/php-css-parser",
-            "keywords": [
-                "css",
-                "parser",
-                "stylesheet"
-            ],
-            "support": {
-                "issues": "https://github.com/sabberworm/PHP-CSS-Parser/issues",
-                "source": "https://github.com/sabberworm/PHP-CSS-Parser/tree/8.4.0"
-            },
-            "time": "2021-12-11T13:40:54+00:00"
-        },
-        {
-            "name": "sensio/framework-extra-bundle",
-            "version": "v6.2.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "2f886f4b31f23c76496901acaedfedb6936ba61f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/2f886f4b31f23c76496901acaedfedb6936ba61f",
-                "reference": "2f886f4b31f23c76496901acaedfedb6936ba61f",
-                "shasum": ""
-            },
-            "require": {
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
                 "doctrine/annotations": "^1.0|^2.0",
                 "php": ">=7.2.5",
                 "symfony/config": "^4.4|^5.0|^6.0",
@@ -3106,7 +2917,6 @@
             },
             "abandoned": "Symfony",
             "time": "2023-02-24T14:57:12+00:00"
-<<<<<<< HEAD
         },
         {
             "name": "stella-maris/clock",
@@ -3154,8 +2964,6 @@
                 "source": "https://github.com/stella-maris-solutions/clock/tree/0.1.7"
             },
             "time": "2022-11-25T16:15:06+00:00"
-=======
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3821,7 +3629,6 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-<<<<<<< HEAD
             "version": "v3.0.2",
             "source": {
                 "type": "git",
@@ -3832,18 +3639,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/26954b3d62a6c5fd0ea8a2a00c0353a14978d05c",
                 "reference": "26954b3d62a6c5fd0ea8a2a00c0353a14978d05c",
-=======
-            "version": "v3.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "e2d1534420bd723d0ef5aec58a22c5fe60ce6f5e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/e2d1534420bd723d0ef5aec58a22c5fe60ce6f5e",
-                "reference": "e2d1534420bd723d0ef5aec58a22c5fe60ce6f5e",
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
                 "shasum": ""
             },
             "require": {
@@ -3881,11 +3676,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-<<<<<<< HEAD
                 "source": "https://github.com/symfony/deprecation-contracts/tree/v3.0.2"
-=======
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.2.1"
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
             },
             "funding": [
                 {
@@ -3901,11 +3692,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
             "time": "2022-01-02T09:55:41+00:00"
-=======
-            "time": "2023-03-01T10:25:55+00:00"
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
         },
         {
             "name": "symfony/doctrine-bridge",
@@ -4326,7 +4113,6 @@
         },
         {
             "name": "symfony/event-dispatcher-contracts",
-<<<<<<< HEAD
             "version": "v3.0.2",
             "source": {
                 "type": "git",
@@ -4337,18 +4123,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/7bc61cc2db649b4637d331240c5346dcc7708051",
                 "reference": "7bc61cc2db649b4637d331240c5346dcc7708051",
-=======
-            "version": "v3.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/event-dispatcher-contracts.git",
-                "reference": "0ad3b6f1e4e2da5690fefe075cd53a238646d8dd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/0ad3b6f1e4e2da5690fefe075cd53a238646d8dd",
-                "reference": "0ad3b6f1e4e2da5690fefe075cd53a238646d8dd",
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
                 "shasum": ""
             },
             "require": {
@@ -4398,11 +4172,7 @@
                 "standards"
             ],
             "support": {
-<<<<<<< HEAD
                 "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.0.2"
-=======
-                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.2.1"
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
             },
             "funding": [
                 {
@@ -4418,11 +4188,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
             "time": "2022-01-02T09:55:41+00:00"
-=======
-            "time": "2023-03-01T10:32:47+00:00"
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
         },
         {
             "name": "symfony/expression-language",
@@ -8780,10 +8546,7 @@
         },
         {
             "name": "symfony/var-exporter",
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
             "version": "v6.0.19",
             "source": {
                 "type": "git",
@@ -8798,23 +8561,6 @@
             },
             "require": {
                 "php": ">=8.0.2"
-=======
-            "version": "v6.2.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/var-exporter.git",
-                "reference": "86062dd0103530e151588c8f60f5b85a139f1442"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/86062dd0103530e151588c8f60f5b85a139f1442",
-                "reference": "86062dd0103530e151588c8f60f5b85a139f1442",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.1"
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
->>>>>>> 13f26b7c7f24cbc23d39915dc56ad7bf73a688db
             },
             "require-dev": {
                 "symfony/var-dumper": "^5.4|^6.0"
@@ -8855,14 +8601,7 @@
                 "serialize"
             ],
             "support": {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
                 "source": "https://github.com/symfony/var-exporter/tree/v6.0.19"
-=======
-                "source": "https://github.com/symfony/var-exporter/tree/v6.2.7"
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
->>>>>>> 13f26b7c7f24cbc23d39915dc56ad7bf73a688db
             },
             "funding": [
                 {
@@ -8878,14 +8617,8 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
             "time": "2023-01-13T08:34:10+00:00"
-=======
-            "time": "2023-02-24T10:42:00+00:00"
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
->>>>>>> 13f26b7c7f24cbc23d39915dc56ad7bf73a688db
         },
         {
             "name": "symfony/web-link",
@@ -9810,10 +9543,6 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
             "version": "9.2.25",
             "source": {
                 "type": "git",
@@ -9824,19 +9553,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/0e2b40518197a8c0d4b08bc34dfff1c99c508954",
                 "reference": "0e2b40518197a8c0d4b08bc34dfff1c99c508954",
-=======
-            "version": "9.2.26",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "443bc6912c9bd5b409254a40f4b0f4ced7c80ea1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/443bc6912c9bd5b409254a40f4b0f4ced7c80ea1",
-                "reference": "443bc6912c9bd5b409254a40f4b0f4ced7c80ea1",
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
->>>>>>> 13f26b7c7f24cbc23d39915dc56ad7bf73a688db
                 "shasum": ""
             },
             "require": {
@@ -9892,15 +9608,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.25"
-=======
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.26"
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
->>>>>>> 13f26b7c7f24cbc23d39915dc56ad7bf73a688db
             },
             "funding": [
                 {
@@ -9908,15 +9616,8 @@
                     "type": "github"
                 }
             ],
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
             "time": "2023-02-25T05:32:00+00:00"
-=======
-            "time": "2023-03-06T12:58:08+00:00"
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
->>>>>>> 13f26b7c7f24cbc23d39915dc56ad7bf73a688db
         },
         {
             "name": "phpunit/php-file-iterator",
