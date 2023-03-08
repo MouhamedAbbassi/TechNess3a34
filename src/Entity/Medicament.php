@@ -109,7 +109,7 @@ class Medicament
     {
         $this->id_pharmacie = new ArrayCollection();
 
-   
+    }
    
     public function getId(): ?int
     {
@@ -203,16 +203,5 @@ class Medicament
     }
 
 
-        }
-
-        return $this;
-    }
-
-
-            }
-        }
-
-        return $this;
-    }
-
+}
 
