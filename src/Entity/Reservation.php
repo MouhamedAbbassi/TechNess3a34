@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Entity;
 
+namespace App\Entity;
+use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ReservationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -28,6 +29,11 @@ class Reservation
     #[ORM\ManyToOne(inversedBy: 'reservpat')]
     private ?User $patient = null;
 
+    #[ORM\OneToOne(mappedBy: 'reservations', cascade: ['persist', 'remove'])]
+    private ?Ordonnance $ordonnance = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    private ?Fiche $Fiche = null;
 
 
 
@@ -74,5 +80,38 @@ class Reservation
         return $this;
     }
 
+    public function getOrdonnance(): ?Ordonnance
+    {
+        return $this->ordonnance;
+    }
+
+    public function setOrdonnance(?Ordonnance $ordonnance): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($ordonnance === null && $this->ordonnance !== null) {
+            $this->ordonnance->setReservations(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($ordonnance !== null && $ordonnance->getReservations() !== $this) {
+            $ordonnance->setReservations($this);
+        }
+
+        $this->ordonnance = $ordonnance;
+
+        return $this;
+    }
+
+    public function getFiche(): ?Fiche
+    {
+        return $this->Fiche;
+    }
+
+    public function setFiche(?Fiche $Fiche): self
+    {
+        $this->Fiche = $Fiche;
+
+        return $this;
+    }
     
 }

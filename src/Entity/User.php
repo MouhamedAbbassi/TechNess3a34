@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Entity;
-
-use App\Repository\UserRepository;
+ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,6 +9,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -70,7 +70,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $adresse = null;
 
-    #[ORM\ManyToOne(inversedBy: 'medecin')]
+    #[ORM\ManyToOne(inversedBy: 'medecin',cascade: ['remove'])]
     private ?Speciality $speciality = null;
 
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Reservation::class)]
@@ -82,10 +82,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Reservation::class)]
     private Collection $reservpat;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $status = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $progress = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $baned = null;
+
+    #[ORM\OneToMany(mappedBy: 'doctor', targetEntity: Ordonnance::class)]
+    private Collection $ordonnances;
+
+    #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Ordonnance::class)]
+    private Collection $ordPatients;
+
+    #[ORM\OneToMany(mappedBy: 'doctor', targetEntity: Fiche::class)]
+    private Collection $ficheDoctors;
+
+    #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Fiche::class)]
+    private Collection $fiches;
+
+    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'doctors')]
+    private Collection $patients;
+
+    #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'patients')]
+    private Collection $doctors;
+
     public function __construct()
     {
         $this->speciality = null;
         $this->reservpat = new ArrayCollection();
+        $this->rates = new ArrayCollection();
+        $this->ordonnances = new ArrayCollection();
+        $this->ordPatients = new ArrayCollection();
+        $this->ficheDoctors = new ArrayCollection();
+        $this->fiches = new ArrayCollection();
+        $this->patients = new ArrayCollection();
+        $this->doctors = new ArrayCollection();
     }
 
 

@@ -3,15 +3,3 @@
 #    controller: App\Controller\DefaultController::index
 login_check:
   path: /login_check
-  # config/routes.yaml
-medicaments:
-    path: /medicaments
-    controller: App\Controller\MedicamentsController::medicaments
-    # config/routes.yaml
-
-# app_panierx_new:
-#     path: /panierx/new/
-#     controller: App\Controller\PanierController::new
-
-
-    

@@ -47,7 +47,7 @@ class Medicament
 
     private ?int $Nb_dose = null;
 
-    
+
 
 
     #[ORM\Column]
@@ -102,12 +102,13 @@ class Medicament
    
   
 
+    #[ORM\OneToMany(mappedBy: 'medicament', targetEntity: OrdonnanceMedicament::class)]
+    private Collection $ordonnanceMedicaments;
 
     public function __construct()
     {
         $this->id_pharmacie = new ArrayCollection();
-        $this->idmed = new ArrayCollection();
-   }
+
    
    
     public function getId(): ?int
@@ -201,55 +202,17 @@ class Medicament
         return $this;
     }
 
-    /**
-     * @return Collection<int, PanierItem>
-     */
-    public function getIdmed(): Collection
-    {
-        return $this->idmed;
-    }
 
-    public function addIdmed(PanierItem $idmed): self
-    {
-        if (!$this->idmed->contains($idmed)) {
-            $this->idmed->add($idmed);
-            $idmed->setMedicament($this);
         }
 
         return $this;
     }
 
-    public function removeIdmed(PanierItem $idmed): self
-    {
-        if ($this->idmed->removeElement($idmed)) {
-            // set the owning side to null (unless already changed)
-            if ($idmed->getMedicament() === $this) {
-                $idmed->setMedicament(null);
+
             }
         }
 
         return $this;
     }
 
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
 
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-   
-
-    
-   
-
-    
-    
-    
-    
-}

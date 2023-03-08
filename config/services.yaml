@@ -5,9 +5,11 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     image_directory: '%kernel.project_dir%/public/uploads'
-    images_directory: '%kernel.project_dir%/public/uploads/medicament'
+
 
 services:
+    App\Service\PdfGenerator:
+        arguments: []
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
