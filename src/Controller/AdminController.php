@@ -115,4 +115,14 @@ class AdminController extends AbstractController
         ]);
 
     }
+    #[Route('adminUnban/{id}', name: 'adminUnban')]
+    public function adminUnban(ManagerRegistry $doctrine,$id,Request $req): Response
+    {
+        $em = $doctrine->getManager();
+        $user = $doctrine->getRepository(User::class)->find($id);
+            $user->setBaned(null);
+            $em->persist($user);
+            $em->flush();
+        return $this->redirectToRoute('listMedecin');
+    }
 }

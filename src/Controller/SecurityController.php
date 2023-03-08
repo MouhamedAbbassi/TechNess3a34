@@ -256,7 +256,7 @@ class SecurityController extends AbstractController
                 return $this->redirectToRoute('resetPassword');
             }
             $sid = 'ACe0d39e374a4b33c50217f1c834d14a13';
-            $token = '8a84b257fff04d65748293811c358d8a';
+            $token = '5e930d060e34882e4131bc1600ad5248';
             $client = new Client($sid, $token);
 
             $client->messages->create(
@@ -264,7 +264,7 @@ class SecurityController extends AbstractController
                 $recevier->getNumero(),
                 [
                     // A Twilio phone number you purchased at twilio.com/console
-                    'from' => '++1 507 609 3506',
+                    'from' => '+15076093506',
                     // the body of the text message you'd like to send
                     'body' => 'Your reset token is :' .$tokensalt
                 ]
