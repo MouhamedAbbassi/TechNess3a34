@@ -1,61 +1,59 @@
 {% extends 'nav_con.html.twig' %}
-
-{% block title %}{% endblock %}
-
-{% block body %}
-
-	<main>
-
-
-		{% block content %}
+ 
+ {% block body %}
+<main>
+{% block content %}
 
 			<div class="album py-5 bg-light">
 				<div class="container">
-					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-						{% for event in evenements %}
-							
-				
-			
-							<div class="col">
-								<div class="card shadow-sm">
-									<div>
-										<img src="{{ qr_code_data_uri(event.capacite) }}"/>
-										
-									</div>
-									<div class="card-body">
-										<p class="card-text">{{event.nom}}</p>
-										<small class="text-muted">{{event.capacite}}</small>
-										<div class="d-flex justify-content-between align-items-center">
-											<div class="btn-group">
-												<button type="button" class="btn btn-sm btn-outline-secondary">
-													<a href="{{ path('app_evenement_show_front', {id :event.id()}) }}">Voir Détails</a>
-												</button>
-												<button type="button" class="btn btn-sm btn-outline-secondary" onclick="msg()">
-													<a href="{{ path('app_participation_new', {event: event.id()}) }}">Participer</a>
-												</button>
-											</div>
-											<div>
-											<button type="button" class="btn btn-sm btn-outline-success">
-												<a href="{{ path('app_evenement_like', {user:1, id: event.id()}) }}">
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+					
 
+                         	{% for event in evenements %} 
+	            <div class="col"> 
+ 	               <div class="card mb-4 shadow-sm">		
+		  
+          {#  <img src="{{ qr_code_data_uri(  "Nom  :" ~ event.nom ~ "\n Date : " ~ event.date | date ~ "\n Prix : " ~ event.prix  ,  ) }}"	#}
+		  <img src=	"{{ asset('/uploads/' ~ event.image) }}">
+
+		    <div class="card-body">
+
+             	<p class="card-text">{{event.nom}}</p>
+				<small class="text-muted">{{event.capacite}}</small>
+
+              	<div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">
+							<a href="{{ path('app_evenement_show_front', {id :event.id()}) }}">Voir Détails</a>
+									</button>
+				  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="msg()">
+							<a href="{{ path('app_participation_new', {event: event.id()}) }}">Participer</a>
+									</button>
+                </div>
+                <small> <button type="button" class="btn btn-sm btn-outline-success">
+							<a href="{{ path('app_evenement_like', {user:2, id: event.id()}) }}">
 													{{ bootstrap_icon('hand-thumbs-up') }}
 													{{ event.likes|length }}
 
-												</button> 
-											</div>
-
-											</div>
-										</div>
-									</div>
-								</div>
-							{% endfor %}
-						</div>
-					</div>
-				</div>
-			</main>
+									</button> 
+									</small>
+              </div>
+            </div>
+	
+           </div>
+	
+		    {% endfor %}
+       
+		</div>
+		</div>
+		</main>
+		
+			
+			
 		{% endblock %}
 		{% block Javascript %}
 			{{ parent() }}
+			
 			<script src="{{ asset('backOffice/js/custom/jquery.dataTables.min.js') }}"></script>
 			<script src="{{ asset('backOffice/js/custom/dataTables.bootstrap5.min.js') }}"></script>
 			<script src="{{ asset('backOffice/js/custom/dataTables.bootstrap5.min.js') }}"></script>
@@ -66,4 +64,5 @@
 			</script>
 		{% endblock %}
 
-	{% endblock %}
+		{% endblock %}
+ 

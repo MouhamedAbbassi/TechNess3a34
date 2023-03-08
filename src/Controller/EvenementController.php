@@ -20,7 +20,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
-
+use Knp\Component\Pager\PaginatorInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/evenement')]
 class EvenementController extends AbstractController
@@ -40,7 +42,6 @@ class EvenementController extends AbstractController
             'evenements' => $evenementRepository->findAll(),
         ]);
     }
-
     #[Route('/events/like/{id}/{user}', name: 'app_evenement_like', methods: ['GET'])]
     public function like(
         Request $request, 
@@ -64,7 +65,7 @@ class EvenementController extends AbstractController
     #this is like section 
     #[Route('/events/{id}/likes', name: 'app_evenement_getlikes', methods: ['GET'])]
     public function getLikes(
-        Request $request, 
+          Request $request, 
           EvenementRepository $evenementRepository, 
           LikeRepository $likeRepository
     ): Response
@@ -90,13 +91,40 @@ class EvenementController extends AbstractController
         Request $request,
         EvenementRepository $evenementRepository ,
         UserRepository $userRepository , 
-        MailerInterface $mailer): Response
+        MailerInterface $mailer,SluggerInterface $slugger): Response
     {
         $evenement = new Evenement();
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+                /** @var UploadedFile $eventImage */
+            $eventImage = $form->get('image')->getData();
+
+            // this condition is needed because the 'eventImage' field is not required
+            // so the Image file must be processed only when a file is uploaded
+            if ($eventImage) {
+                $originalFilename = pathinfo($eventImage->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $eventImage->guessExtension();
+
+                // Move the file to the directory where images are stored
+                try {
+                    $eventImage->move(
+                        $this->getParameter('image_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'eventImage' property to store the image file name
+                // instead of its contents
+                $evenement->setImage($newFilename);
+            }  
+
             $evenementRepository->save($evenement, true); 
            //get all users
             $allUsers = $userRepository->findAll();
@@ -186,7 +214,7 @@ class EvenementController extends AbstractController
             foreach ($evenement->getParticipations() as   $value) {
                 $email = (new Email())
                 ->from('symfonyttester@gmail.com')
-                ->to($userRepository->findOne($value->getUserId())->getEmail() ) 
+                ->to($userRepository->findOneBy($value->getUserId())->getEmail() ) 
                 ->subject('EVENT '.$evenement->getNom().' Canceled')
                 ->html('<p>We  want to let you know  that we canceled '.$evenement->getNom().' </p>');
                 $mailer->send($email);

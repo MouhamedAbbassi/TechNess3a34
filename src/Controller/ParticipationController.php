@@ -38,7 +38,7 @@ class ParticipationController extends AbstractController
         $userp = $this->getUser();
         $participation ->setUserId($userRepository->find(4));
         $participation ->setEvent($evenementRepository->find(7));
-        $participation ->setTest("test");
+      
 
         
         $participationRepository->save($participation,true);

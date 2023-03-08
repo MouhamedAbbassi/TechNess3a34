@@ -14,7 +14,8 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use App\Form\FileType;
+
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class EvenementType extends AbstractType
 {
@@ -86,6 +87,14 @@ class EvenementType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('image', FileType::class, [
+                'required' => false,
+                'data_class' => null,
+                // Register new key "empty_data" with an empty string
+                'empty_data' => ''
+            ])
+
+           
             
 
             ;
