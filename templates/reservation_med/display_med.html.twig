@@ -24,7 +24,8 @@
 							
                             <tr>
                                 <th>Id</th>
-                                <th>Date</th>
+                                <th>Start date</th>
+                                <th>End date</th>
                                 <th>Nom du patient</th>
                                
                               
@@ -35,7 +36,8 @@
                         {% for reservation in reservations %}
                             <tr>
                                 <td>{{ reservation.id }}</td>
-                                <td>{{ reservation.date ? reservation.date|date('Y-m-d') : '' }}</td>
+                                <td>{{ reservation.start ? reservation.start|date('Y-m-d') : '' }}</td>
+                                <td>{{ reservation.end ? reservation.end|date('Y-m-d') : '' }}</td>
                                 <td>{{ reservation.patient }}</td>
                                
                               

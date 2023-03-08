@@ -37,8 +37,16 @@
                         <tbody>
                             
                             <tr>
-                                <th>Date</th>
-                                <td>{{ reservation.date ? reservation.date|date('Y-m-d') : '' }}</td>
+                                <th>Date Debut</th>
+								<td>{{ reservation.start ? reservation.start|date('Y-m-d') : '' }}</td>
+							</tr>
+								<tr>
+								<th>Date Fin</th>
+                                <td>{{ reservation.end ? reservation.end|date('Y-m-d') : '' }}</td>
+							</tr>
+						<tr>
+								<th>Comment</th>
+                                <td>{{ reservation.comment }}</td>
                             </tr>
                             
                             <tr>
@@ -58,6 +66,10 @@
                             <tr>
                                 <th>Adresse de la cabinet</th>
                                 <td>{{ users.adresse }}</td>
+                            </tr>
+							<tr>
+                                <th>Rate</th>
+                                <td>{{ users.rates }}</td>
                             </tr>
 
 							

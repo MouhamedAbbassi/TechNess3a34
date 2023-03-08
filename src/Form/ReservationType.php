@@ -15,16 +15,26 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Event\PostSubmitEvent;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class ReservationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('date')
+            ->add('start' ,DateTimeType::class , [
+              'date_widget' => 'single_text'
+
+            ])
+            ->add('end' ,DateTimeType::class , [
+
+                'date_widget' => 'single_text'
+
+            ])
+            ->add('comment')
             
            
-            ->add('Send',SubmitType::class) ;
+            ->add('Book',SubmitType::class) ;
 
         
         }

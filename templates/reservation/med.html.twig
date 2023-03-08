@@ -45,19 +45,40 @@
                        
                                
                                 <tr>
-                                    <th>Id</th>
+                                    <th>Nom</th>
                                    
-                                    <th>Med</th>
-                                   
+                                    <th>Prix </th>
+                                    <th>Rate </th>
+									<th>Adresse </th>
+
 									<th>Actions</th>
                                   
                                    
                                 </tr>
                                 {% for i in med %}
                                 <tr>
-                                    <td>{{ i.id }}</td>
-                                   
                                     <td>{{ i.nom }}</td>
+                                   
+                                    <td>{{ i.prix }}</td>
+									<td>
+										{% if i.rates >= 1 %}
+										<i class="ri-star-s-fill"></i>
+										{%endif%}
+										{% if i.rates  >= 2 %}
+										<i class="ri-star-s-fill"></i>
+										{%endif%}
+										{% if i.rates >= 3 %}
+										<i class="ri-star-s-fill"></i>
+										{%endif%}
+										{% if i.rates >= 4 %}
+										<i class="ri-star-s-fill"></i>
+										{%endif%}
+										{% if i.rates ==5 %}
+										<i class="ri-star-s-fill"></i>
+										   {%endif%}</td>
+									
+									<td>{{ i.adresse }}</td>
+									
                                    
 									<td><a href="{{ path('app_reservation_new' , {'id': i.id} ) }}">Continue</a> </td>
                                 

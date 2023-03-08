@@ -19,8 +19,8 @@ use App\Repository\SpecialityRepository;
 
 class ReservationAdminController extends AbstractController
 {
-   /* #[Route('/resback', name: 'app_reservation_admin')]
-    public function index(ReservationRepository $reservationRepository): Response
+    #[Route('/resback', name: 'app_reservation_admin')]
+    public function displayUsersForAdmin(ReservationRepository $reservationRepository): Response
     {       $res=$reservationRepository->findAll();
         
               //$khouna= $res->getUsers();
@@ -34,19 +34,15 @@ class ReservationAdminController extends AbstractController
 
 
     
-    #[Route('/{id}', name: 'app_adminres_show', methods: ['GET'])]
-    public function show(Reservation $reservation , UserRepository $userRepository ): Response
+    #[Route('/dispRates', name: 'app_adminres_show', methods: ['GET'])]
+    public function displayRatesForAdmin(RateRepository $rateRepository ): Response
     {
-        $res= $reservation->getUsers();
-        
-             
-
-
+       
         return $this->render('/back_office/reservation_admin_back/show.html.twig', [
-            'reservation' => $reservation,
-             'users' => $userRepository->find($res) ,
+            
+             'rates' => $rateRepository->findAll(),
         ]);
-    }*/
+    }
 
     
 

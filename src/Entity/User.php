@@ -85,13 +85,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?bool $status = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $rates = null;
+
 
 
     public function __construct()
     {
         $this->speciality = null;
         $this->reservpat = new ArrayCollection();
-        $this->rates = new ArrayCollection();
+        
     }
 
 
@@ -396,6 +399,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStatus(?bool $status): self
     {
         $this->status = $status;
+    }
+
+    public function getRates(): ?float
+    {
+        return $this->rates;
+    }
+
+    public function setRates(?float $rates): self
+    {
+        $this->rates = $rates;
+
+        return $this;
     }
 
 }

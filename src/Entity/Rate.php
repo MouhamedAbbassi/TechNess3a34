@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\RateRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,9 +14,16 @@ class Rate
     #[ORM\Column]
     private ?int $id = null;
 
+    
+    #[Assert\Range(
+        min: 1,
+        max: 5,
+        notInRangeMessage: 'You must choose between {{ min }} and {{ max }}  to rate a doctor',
+    )]
+    #[Assert\NotBlank]
     #[ORM\Column]
     private ?float $note = null;
-
+    #[Assert\NotBlank]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $opinion = null;
 

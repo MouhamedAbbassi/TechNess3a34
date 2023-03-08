@@ -61,6 +61,18 @@ class ReservationRepository extends ServiceEntityRepository
    
     }
 
+    public function sort($id): array
+    {
+       return $this->createQueryBuilder('s')
+       ->where('s.patient = :idc')
+       ->setParameter('idc',$id)
+       ->orderBy('s.start', 'ASC')
+       ->getQuery()
+       ->getResult();
+   
+    }
+
+
 //    /**
 //     * @return Reservation[] Returns an array of Reservation objects
 //     */

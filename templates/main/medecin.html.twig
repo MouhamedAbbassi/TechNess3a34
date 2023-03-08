@@ -52,12 +52,24 @@
 										<li>
 											Patient Experience Rating
 											<p>
+												
+												{% if app.user.rates >= 1 %}
 												<i class="ri-star-s-fill"></i>
+												{%endif%}
+												{% if app.user.rates  >= 2 %}
 												<i class="ri-star-s-fill"></i>
+												{%endif%}
+												{% if app.user.rates >= 3 %}
 												<i class="ri-star-s-fill"></i>
+												{%endif%}
+												{% if app.user.rates >= 4 %}
 												<i class="ri-star-s-fill"></i>
+												{%endif%}
+												{% if app.user.rates ==5 %}
 												<i class="ri-star-s-fill"></i>
-												5 Stars
+                                                   {%endif%}
+
+												{{ app.user.rates }} Stars
 											</p>
 										</li>
 									</ul>
