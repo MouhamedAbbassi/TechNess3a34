@@ -5,17 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b65ea78-93c6-4c10-82ac-9a17f99d1049" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/TechNess3a34.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TechNess3a34.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/reset_password.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/reset_password.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ResetPasswordController.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/back_office/Security/loginAdmin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/back_office/Security/loginAdmin.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/back_office/Security/listMedecin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/back_office/Security/listMedecin.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/back_office/Security/listPatient.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/back_office/Security/listPatient.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/homeMedecin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/homeMedecin.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/medecin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/medecin.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/patient.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/patient.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/forgetPassword.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/forgetPassword.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +34,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -176,6 +189,7 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/code-unit" />
       <path value="$PROJECT_DIR$/vendor/vich/uploader-bundle" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/twilio/sdk" />
     </include_path>
   </component>
   <component name="ProjectId" id="2M7mFo5FyJckUIMkAxxG4eb3b8z" />
@@ -188,12 +202,19 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Activity/sportify" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/main" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\muham\Desktop\dev\TechNess3a34\templates\main" />
+      <recent name="C:\Users\muham\Desktop\dev\TechNess3a34\templates\back_office\Security" />
+      <recent name="C:\Users\muham\Desktop\dev\TechNess3a34\src\Controller" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -210,6 +231,18 @@
       <workItem from="1677326717322" duration="4616000" />
       <workItem from="1677335269247" duration="3685000" />
       <workItem from="1677349227686" duration="3426000" />
+      <workItem from="1677425383013" duration="5336000" />
+      <workItem from="1677498749712" duration="4039000" />
+      <workItem from="1677586816408" duration="2182000" />
+      <workItem from="1677624035025" duration="26918000" />
+      <workItem from="1677771707129" duration="5004000" />
+      <workItem from="1677864565311" duration="8053000" />
+      <workItem from="1678022534459" duration="7598000" />
+      <workItem from="1678046371684" duration="19689000" />
+      <workItem from="1678154327207" duration="528000" />
+      <workItem from="1678155148083" duration="1328000" />
+      <workItem from="1678205293846" duration="675000" />
+      <workItem from="1678207300505" duration="11296000" />
     </task>
     <servers />
   </component>

@@ -1,8 +1,14 @@
 {% extends 'back_office/base.html.twig' %}
 {% block content %}
+<!DOCTYPE html>
 
+<html lang="en">
+<!-- begin::Body -->
 <body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--fixed kt-subheader--enabled kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-page--loading">
+
 <!-- begin:: Page -->
+
+
 <div  class="kt-grid kt-grid--hor kt-grid--root">
     <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
 
@@ -25,185 +31,28 @@
                 <div style="margin-right: 300px" class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
 
                     <!--begin:: Widgets/Applications/User/Profile3-->
-                    {% for u in user %}
-                    {% if u.roles == ["ROLE_MEDECIN"] %}
-                    <div style="margin-bottom: 20px" class="kt-portlet">
+                    <div class="kt-portlet">
 
-                     <div >
-                         <div  class="row" >
-                        <div  class="kt-portlet__body">
+                      <div class="row" >
 
-                            <div  class="kt-widget kt-widget--user-profile-3">
-                                <div class="kt-widget__top">
-                                    <div class="kt-widget__media kt-hidden-">
-                                        <img src="{{ asset('/uploads/'~u.image) }}" alt="image">
-                                    </div>
-                                    <div class="kt-widget__pic kt-widget__pic--danger kt-font-danger kt-font-boldest kt-font-light kt-hidden">
-                                        JM
-                                    </div>
-                                    <div class="kt-widget__content">
-                                        <div class="kt-widget__head">
-                                            <a href="#" class="kt-widget__username">
-                                                {{u.nom}}-{{u.prenom}}
-                                            </a>
-                                            <div class="kt-widget__action">
+                             <div >
 
-                                                {% if u.status == null %}
-                                                <a href="{{path('adminApprove',{'id':u.id})}}" type="button" class="btn btn-label-success btn-sm btn-upper">Approve</a>&nbsp;
-                                                {% endif %}
-                                                {% if u.status %}
-                                                    <button  type="button" class="btn btn-label-success btn-sm btn-upper">
-                                                        <i class="flaticon2-correct kt-font-success"></i>
-                                                        Approved
-                                                    </button>&nbsp;
-                                                {% endif %}
-
-                                                {% if u.baned == null %}
-                                                 <a type="button" href="{{path('adminBan',{'id':u.id})}}" class="btn btn-label-danger">Ban</a>&nbsp;
-                                                {% endif %}
-
-                                                 {% if u.baned %}
-                                                  <a type="button" href="{{path('adminBan',{'id':u.id})}}" class="btn btn-label-danger">Baned</a>&nbsp;
-                                                 {% endif %}
-                                                     </div>
-                                        </div>
-                                        <div class="kt-widget__subhead">
-                                            <a href="#"><i class="flaticon2-new-email"></i>{{u.email}}</a><br><br>
-                                            <a href="#"><i class="flaticon2-calendar-3"></i>{{u.speciality}} </a><br><br>
-                                            <a href="#"><i class="flaticon2-phone"></i>{{u.numero}}</a><br>
-                                        </div>
-                                        <div class="kt-widget__info">
-                                            <div class="kt-widget__desc">
-                                                {{u.bioDescription}}
-                                            </div>
-                                            <div class="kt-widget__progress">
-                                                <div class="kt-widget__text">
-                                                    Progress
-                                                </div>
-                                                <div class="progress" style="height: 5px;width: 100%;">
-                                                    <div class="progress-bar kt-bg-success" role="progressbar" style="width:{{u.progress}}%;" aria-valuenow="{{u.progress}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                                <div class="kt-widget__stats">
-                                                    {{u.progress}}%
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="kt-widget__bottom">
-                                    <div class="kt-widget__item">
-                                        <div class="kt-widget__icon">
-                                            <i class="flaticon-piggy-bank"></i>
-                                        </div>
-                                        <div class="kt-widget__details">
-                                            <span class="kt-widget__title">Earnings</span>
-                                            <span class="kt-widget__value"><span>$</span>249,500</span>
-                                        </div>
-                                    </div>
-                                    <div class="kt-widget__item">
-                                        <div class="kt-widget__icon">
-                                            <i class="flaticon-confetti"></i>
-                                        </div>
-                                        <div class="kt-widget__details">
-                                            <span class="kt-widget__title">Expenses</span>
-                                            <span class="kt-widget__value"><span>$</span>164,700</span>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="kt-widget__item">
-                                        <div class="kt-widget__icon">
-                                            <i class="flaticon-chat-1"></i>
-                                        </div>
-                                        <div class="kt-widget__details">
-                                            <span class="kt-widget__title">648 Comments</span>
-                                            <a href="#" class="kt-widget__value kt-font-brand">View</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                      </div>
-                     </div>
+                                <h4 style="margin-left: 100px;margin-top: 30px">  You are going to ban "{{ users.prenom }}-{{ users.nom }}" </h4>
+                                 <div style="margin-left: 10px" class="kt-portlet__body">
+                                     {{ form_start(form) }}
+                                    <h5>
+                                        {{ form_row(form.baned ,{'label': "Text des consignes"}) }}
+                                    </h5>
+                                     {{ form_end(form) }}
+                                 </div>
+                             </div>
 
                     </div>
-                    {% endif %}
-                    {% endfor %}
 
 
 
-                    <!--Begin::pagination-->
-                    <div class="row">
-                        <div class="col-xl-12">
 
-                            <!--begin:: Components/Pagination/Default-->
-                            <div class="kt-portlet">
-                                <div class="kt-portlet__body">
 
-                                    <!--begin: Pagination-->
-                                    <div class="kt-pagination kt-pagination--brand">
-                                        <ul class="kt-pagination__links">
-                                            <li class="kt-pagination__link--first">
-                                                <a href="#"><i class="fa fa-angle-double-left kt-font-brand"></i></a>
-                                            </li>
-                                            <li class="kt-pagination__link--next">
-                                                <a href="#"><i class="fa fa-angle-left kt-font-brand"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#">...</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">29</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">30</a>
-                                            </li>
-                                            <li class="kt-pagination__link--active">
-                                                <a href="#">31</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">32</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">33</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">34</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">...</a>
-                                            </li>
-                                            <li class="kt-pagination__link--prev">
-                                                <a href="#"><i class="fa fa-angle-right kt-font-brand"></i></a>
-                                            </li>
-                                            <li class="kt-pagination__link--last">
-                                                <a href="#"><i class="fa fa-angle-double-right kt-font-brand"></i></a>
-                                            </li>
-                                        </ul>
-                                        <div class="kt-pagination__toolbar">
-                                            <select class="form-control kt-font-brand" style="width: 60px">
-                                                <option value="10">10</option>
-                                                <option value="20">20</option>
-                                                <option value="30">30</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select>
-                                            <span class="pagination__desc">
-														Displaying 10 of 230 records
-													</span>
-                                        </div>
-                                    </div>
-
-                                    <!--end: Pagination-->
-                                </div>
-                            </div>
-
-                            <!--end:: Components/Pagination/Default-->
-                        </div>
-                    </div>
-                    <!--End::pagination-->
                 </div>
 
                 <!-- end:: Content -->

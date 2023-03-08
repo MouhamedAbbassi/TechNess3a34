@@ -85,6 +85,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?bool $status = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $progress = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $baned = null;
+
 
 
     public function __construct()
@@ -396,6 +402,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStatus(?bool $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getProgress(): ?float
+    {
+        return $this->progress;
+    }
+
+    public function setProgress(?float $progress): self
+    {
+        $this->progress = $progress;
+
+        return $this;
+    }
+
+    public function getBaned(): ?string
+    {
+        return $this->baned;
+    }
+
+    public function setBaned(?string $baned): self
+    {
+        $this->baned = $baned;
 
         return $this;
     }

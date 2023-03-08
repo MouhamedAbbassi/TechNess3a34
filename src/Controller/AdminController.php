@@ -6,6 +6,7 @@ use App\Entity\Classroom;
 use App\Entity\Speciality;
 use App\Entity\User;
 use App\Form\AdminApproveType;
+use App\Form\BanType;
 use App\Form\ClassroomType;
 use App\Form\SpecialityType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -90,6 +91,28 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('speciality');
         }
         return $this->renderForm('back_office/security/addSpeciality.html.twig',['form'=>$form]);
+
+    }
+    #[Route('adminBan/{id}', name: 'adminBan')]
+    public function adminBan(ManagerRegistry $doctrine,$id,Request $req): Response
+    {
+        $em = $doctrine->getManager();
+        $user = $doctrine->getRepository(User::class)->find($id);
+        $users = $doctrine->getRepository(User::class)->find($id);
+        $form = $this->createForm(BanType::class,$user);
+        $form->handleRequest($req);
+        if($form->isSubmitted()){
+            $em->persist($user);
+            $em->flush();
+            $roles=$user->getRoles();
+
+            return $this->redirectToRoute('listMedecin');
+
+        }
+        return $this->renderForm('back_office/security/adminBan.html.twig',[
+             'form'=>$form,
+            'users' => $users
+        ]);
 
     }
 }

@@ -364,21 +364,7 @@
             <link href="{{ asset('frontOffice/assets/images/favicon.png') }}"  rel="stylesheet" />
         {% endblock %}
 
-        {% block javascripts %}
-            <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery.min.js"></script>
-            <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-            <script src="{{ asset('assets/js/choicePicker.js') }}"></script>
-            <script src="{{ asset('assets/js/meanmenu.min.js') }}"></script>
-            <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
-            <script src="{{ asset('assets/js/swiper-bundle.min.js') }}"></script>
-            <script src="{{ asset('assets/js/appear.min.js') }}"></script>
-            <script src="{{ asset('assets/js/odometer.min.js') }}"></script>
-            <script src="{{ asset('assets/js/wow.min.js') }}"></script>
-            <script src="{{ asset('assets/js/jspdf.debug.js') }}"></script>
-            <script src="{{ asset('assets/js/form-validator.min.js') }}"></script>
-            <script src="{{ asset('assets/js/contact-form-script.js') }}"></script>
-            <script src="{{ asset('assets/js/ajaxchimp.min.js') }}"></script>
-            <script src="{{ asset('assets/js/custom.js') }}"></script>        {% endblock %}
+
     </head>
     <body>
         {% block body %}{% endblock %}
@@ -542,4 +528,22 @@
         <i class="ri-arrow-up-s-fill"></i>
     </div>
     <!-- End Go Top Area --></footer>
+    {% block javascript %}
+     <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="{{ asset('frontOffice/assets/js/jquery.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/bootstrap.bundle.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/choicePicker.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/meanmenu.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/owl.carousel.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/swiper-bundle.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/appear.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/odometer.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/wow.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/jspdf.debug.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/form-validator.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/contact-form-script.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/ajaxchimp.min.js') }}"></script>
+            <script src="{{ asset('frontOffice/assets/js/custom.js') }}"></script>
+
+        {% endblock %}
 </html>
