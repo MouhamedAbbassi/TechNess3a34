@@ -67,6 +67,9 @@
                                             <a href="{{path('homeMedecin')}}" class="nav-link border-style active">Home</a>
                                         {% endif %}
                                     </li>
+                                          <li class="nav-item">
+                                        <a href="{{path('app_panierx')}}" class="nav-link border-style active">Shop</a>
+                                    </li>
 
 
                                     <li class="nav-item">
@@ -340,6 +343,7 @@
 
         {% block stylesheets %}
 
+
             <link href="{{ asset('frontOffice/assets/css/bootstrap.min.css') }}"  rel="stylesheet" />
             <link href="{{ asset('frontOffice/assets/css/choicePicker.css') }}"  rel="stylesheet" />
             <link href="{{ asset('frontOffice/assets/css/owl.theme.default.min.css') }}"  rel="stylesheet" />
@@ -354,6 +358,8 @@
             <link href="{{ asset('frontOffice/assets/css/dark-mode.css') }}"  rel="stylesheet" />
             <link href="{{ asset('frontOffice/assets/css/responsive.css') }}"  rel="stylesheet" />
             <link href="{{ asset('frontOffice/assets/images/favicon.png') }}"  rel="stylesheet" />
+            <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+
         {% endblock %}
 
         {% block javascripts %}
@@ -370,7 +376,13 @@
             <script src="{{ asset('assets/js/form-validator.min.js') }}"></script>
             <script src="{{ asset('assets/js/contact-form-script.js') }}"></script>
             <script src="{{ asset('assets/js/ajaxchimp.min.js') }}"></script>
-            <script src="{{ asset('assets/js/custom.js') }}"></script>        {% endblock %}
+            <script src="{{ asset('assets/js/custom.js') }}"></script>   
+            <script src="//code.jquery.com/jquery.js"></script>
+            <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+
+               {% endblock %}
+                   {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
     </head>
     <body>
         {% block body %}{% endblock %}

@@ -71,7 +71,6 @@ class PharmacieController extends AbstractController
     public function delete(Request $request, Pharmacie $pharmacie, PharmacieRepository $pharmacieRepository): Response
     {
             $pharmacieRepository->remove($pharmacie, true);
-        
 
         return $this->redirectToRoute('app_pharmacie_index', [], Response::HTTP_SEE_OTHER);
     }

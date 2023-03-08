@@ -11,6 +11,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 
 
@@ -43,7 +46,7 @@ class Medicament1Type extends AbstractType
             
             ])
             ->add('Nb_dose', IntegerType::class, [
-                'label' => 'Nb_dose',
+                'label' => 'Nombres des doses',
                 'required' => true,
                 'constraints' => [
                     new Assert\Range([
@@ -69,6 +72,31 @@ class Medicament1Type extends AbstractType
             ])
             ->add('Stock')
             ->add('id_pharmacie')
+            ->add('image', FileType::class, [
+                'label' => 'image (Image)',
+
+                // unmapped means that this field is not associated to any entity property
+                'mapped' => false,
+
+                // make it optional so you don't have to re-upload the PDF file
+                // every time you edit the Product details
+                'required' => false,
+
+                // unmapped fields can't define their validation using annotations
+                // in the associated entity, so you can use the PHP constraint classes
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/pdf',
+                            'image/jpeg',
+                            'image/png',
+                            'image/jpg',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid  document',
+                    ])
+                ],
+            ])
         ;
     }
 

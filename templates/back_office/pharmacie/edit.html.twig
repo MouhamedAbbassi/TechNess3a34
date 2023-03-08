@@ -16,6 +16,7 @@
                                         <div class="mb-3">
                                             {{ form_label(form.Nom) }}
                                             {{ form_widget(form.Nom) }}
+                                            {{ form_errors(form.Nom) }}
                                         </div>
                                     </div>
                                     <!--end col-->
@@ -23,18 +24,21 @@
                                         <div class="mb-3">
                                             {{ form_label(form.Adresse) }}
                                             {{ form_widget(form.Adresse) }}
+                                            {{ form_errors(form.Adresse) }}
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="mb-3">
                                             {{ form_label(form.Tempo) }}
                                             {{ form_widget(form.Tempo) }}
+                                            {{ form_errors(form.Tempo) }}
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="mb-3">
                                             {{ form_label(form.tempf) }}
                                             {{ form_widget(form.tempf) }}
+                                            {{ form_errors(form.tempf) }}
                                         </div>
                                     </div>
                                    
@@ -42,7 +46,11 @@
                                     <div class="col-lg-12">
                                         <div class="hstack gap-2 justify-content-end">
                                             <button type="submit" class="btn btn-primary">Update</button>
-                                            <button type="button" class="btn btn-soft-success">Cancel</button>
+                                            <a href="{{ path('app_pharmacie_index')}}">
+
+                                            <button type="button" class="btn btn-soft-success">Cancel
+                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                     <!--end col-->
