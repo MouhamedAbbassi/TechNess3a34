@@ -444,8 +444,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->rates = $rates;
 
-        return $this;
-    }
+     
 
 <<<<<<< HEAD
 =======
