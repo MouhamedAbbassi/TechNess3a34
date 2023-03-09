@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use App\Entity\orphanRemoval;
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
 class Evenement
@@ -79,19 +80,15 @@ class Evenement
 
     
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Participation::class)]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Participation::class,orphanRemoval:true)]
+    #[ORM\JoinColumn(nullable: true )]
     #[Groups("evenements")]
     private Collection $participations;
 
 
 
 
-    #[ORM\OneToMany(mappedBy: 'evenement', targetEntity: Like::class)]
-    #[ORM\JoinColumn(nullable: true)]
-    #[Groups("evenements")]
-    private Collection $likes;
-
+   
     
     /**
      * @Vich\UploadableField(mapping="product_images", fileNameProperty="image")
@@ -102,15 +99,19 @@ class Evenement
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Like::class, orphanRemoval: true)]
+    private Collection $likes;
+
+    public function __construct()
+    {
+        $this->likes = new ArrayCollection();
+    }
+
   
 
 
 
-    public function __construct()
-    {
-        $this->participations = new ArrayCollection();
-        $this->likes = new ArrayCollection(); 
-    }
+   
 
     Public function __tostring() :string{
 
@@ -239,36 +240,7 @@ class Evenement
         return $this;
     }
 
-    /**
-     * @return Collection<int, Like>
-     */
-    public function getLikes(): Collection
-    {
-        return $this->likes;
-    }
-
-    public function addLike(Like $like): self
-    {
-        if (!$this->likes->contains($like)) {
-            $this->likes->add($like);
-            $like->setEvenement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLike(Like $like): self
-    {
-        if ($this->likes->removeElement($like)) {
-            // set the owning side to null (unless already changed)
-            if ($like->getEvenement() === $this) {
-                $like->setEvenement(null);
-            }
-        }
-
-        return $this;
-    }
-
+   
  
     public function setImageFile(File $image = null)
     {
@@ -296,6 +268,36 @@ class Evenement
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Like>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getEvent() === $this) {
+                $like->setEvent(null);
+            }
+        }
 
         return $this;
     }

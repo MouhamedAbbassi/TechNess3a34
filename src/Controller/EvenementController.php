@@ -6,6 +6,7 @@ use App\Entity\Evenement;
 use App\Entity\Like;
 use App\Entity\Likes;
 use App\Form\EvenementType;
+use App\Form\UpdateEvType;
 use App\Repository\EvenementRepository;
 use App\Repository\LikeRepository;
 use App\Repository\LikesRepository;
@@ -42,19 +43,19 @@ class EvenementController extends AbstractController
             'evenements' => $evenementRepository->findAll(),
         ]);
     }
-    #[Route('/events/like/{id}/{user}', name: 'app_evenement_like', methods: ['GET'])]
+    #[Route('/events/like/{id}', name: 'app_evenement_like', methods: ['GET'])]
     public function like(
         Request $request, 
           EvenementRepository $evenementRepository,
-          UserRepository $userRepository,
+          
           LikeRepository $likeRepository
     ): Response
     {
         $event = $evenementRepository->find( $request->attributes->get("id"));
-        $user = $userRepository->find( $request->attributes->get("user"));
+        $userp = $this->getUser();
         $like = new Like();
-        $like->setEvenement($event);
-        $like->addUser($user);
+        $like->setEvent($event);
+        $like->setUser($userp);
         $likeRepository->save($like, true); 
         $event->addLike($like); 
         $evenementRepository->save($event , true );
@@ -102,7 +103,7 @@ class EvenementController extends AbstractController
                 /** @var UploadedFile $eventImage */
             $eventImage = $form->get('image')->getData();
 
-            // this condition is needed because the 'eventImage' field is not required
+            // this condition is needeecord because the 'eventImage' field is not required
             // so the Image file must be processed only when a file is uploaded
             if ($eventImage) {
                 $originalFilename = pathinfo($eventImage->getClientOriginalName(), PATHINFO_FILENAME);
@@ -171,7 +172,7 @@ class EvenementController extends AbstractController
           UserRepository $userRepository,
           MailerInterface $mailer): Response
     {
-        $form = $this->createForm(EvenementType::class, $evenement);
+        $form = $this->createForm(UpdateEvType::class, $evenement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -209,17 +210,19 @@ class EvenementController extends AbstractController
           MailerInterface $mailer): Response
     {
          
-            $evenementRepository->remove($evenement, true);
+            
             if($evenement->getParticipations()!= null){
             foreach ($evenement->getParticipations() as   $value) {
                 $email = (new Email())
                 ->from('symfonyttester@gmail.com')
-                ->to($userRepository->findOneBy($value->getUserId())->getEmail() ) 
+                ->to($userRepository->find($value->getUserId())->getEmail() ) 
                 ->subject('EVENT '.$evenement->getNom().' Canceled')
                 ->html('<p>We  want to let you know  that we canceled '.$evenement->getNom().' </p>');
+                
                 $mailer->send($email);
                       }
                     }
+                    $evenementRepository->remove($evenement, true);
         return $this->render('back_office/evenement/index.html.twig', [
             'evenements' => $evenementRepository->findAll(),
         ]);

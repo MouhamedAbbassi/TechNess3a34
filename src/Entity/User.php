@@ -84,9 +84,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Reservation::class)]
     private Collection $reservpat;
 
-    #[ORM\ManyToOne(inversedBy: 'user')]
-    private ?Like $likes = null;
-
+    
   
 
     public function __construct()

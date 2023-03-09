@@ -4,9 +4,9 @@
 {% endblock %}
 {% block body %}
 	{% block content %}
-		<div class="d-flex">
+		<div class="d-flex" style="margin-top:100px; margin-left:400px">
 			
-			<div>
+			<div >
 				<h1>Evenement details</h1>
 
 				<table class="table">
@@ -43,13 +43,21 @@
 							<th>description</th>
 							<td>{{ evenement.description }}</td>
 						</tr>
+						
 
 					</tbody>
 				</table>
+				                   	
 
 
 			</div>
+			<div >
+
+	<img style="margin-left:150px;margin-top:20px;" src="{{ qr_code_data_uri(  "Nom  :" ~ evenement.nom ~ "\n Date : " ~ evenement.date | date ~ "\n Prix : " ~ evenement.prix  ,  ) }}" >
+
+				</div> 
 		</div>
+
 
 	{% endblock %}
 {% endblock %}

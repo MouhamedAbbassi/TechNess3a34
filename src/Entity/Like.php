@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\LikeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LikeRepository::class)]
@@ -18,60 +16,43 @@ class Like
 
     #[ORM\ManyToOne(inversedBy: 'likes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Evenement $evenement = null;
+    private ?Evenement $event = null;
 
-    #[ORM\OneToMany(mappedBy: 'likes', targetEntity: User::class)]
-    private Collection $user;
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
-    public function __construct()
-    {
-        $this->user = new ArrayCollection();
-    }
+   
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getEvenement(): ?Evenement
+    public function getEvent(): ?Evenement
     {
-        return $this->evenement;
+        return $this->event;
     }
 
-    public function setEvenement(?Evenement $evenement): self
+    public function setEvent(?Evenement $event): self
     {
-        $this->evenement = $evenement;
+        $this->event = $event;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUser(): Collection
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function addUser(User $user): self
+    public function setUser(?User $user): self
     {
-        if (!$this->user->contains($user)) {
-            $this->user->add($user);
-            $user->setLikes($this);
-        }
+        $this->user = $user;
 
         return $this;
     }
 
-    public function removeUser(User $user): self
-    {
-        if ($this->user->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getLikes() === $this) {
-                $user->setLikes(null);
-            }
-        }
-
-        return $this;
+    
     }
-}
+
