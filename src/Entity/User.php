@@ -86,12 +86,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?bool $status = null;
 
     #[ORM\Column(nullable: true)]
-<<<<<<< HEAD
     private ?float $rates = null;
 
-=======
     private ?float $progress = null;
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $baned = null;
@@ -118,9 +115,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->speciality = null;
         $this->reservpat = new ArrayCollection();
-<<<<<<< HEAD
-        
-=======
+
         $this->rates = new ArrayCollection();
         $this->ordonnances = new ArrayCollection();
         $this->ordPatients = new ArrayCollection();
@@ -128,7 +123,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->fiches = new ArrayCollection();
         $this->patients = new ArrayCollection();
         $this->doctors = new ArrayCollection();
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
+
     }
 
 
@@ -394,6 +389,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    
+    
+
 
     /**
      * @return Collection<int, Reservation>
@@ -425,6 +423,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+
     public function isStatus(): ?bool
     {
         return $this->status;
@@ -447,8 +446,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-<<<<<<< HEAD
-=======
+
     public function getProgress(): ?float
     {
         return $this->progress;
@@ -643,7 +641,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-
-
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
 }

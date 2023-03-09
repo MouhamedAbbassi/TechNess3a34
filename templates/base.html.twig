@@ -69,6 +69,9 @@
                                             <a href="{{path('homeMedecin')}}" class="nav-link border-style active">Home</a>
                                         {% endif %}
                                     </li>
+                                          <li class="nav-item">
+                                        <a href="{{path('app_panierx')}}" class="nav-link border-style active">Shop</a>
+                                    </li>
 
 
                                     <li class="nav-item">
@@ -353,12 +356,6 @@
         {% endif %}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
         {% block stylesheets %}
-<style>  
-      #calendrier{
-            width: 70% ;
-            margin: auto;
-
-      }
 
 </style>
             <link href="{{ asset('frontOffice/assets/css/bootstrap.min.css') }}"  rel="stylesheet" />
@@ -375,13 +372,9 @@
             <link href="{{ asset('frontOffice/assets/css/dark-mode.css') }}"  rel="stylesheet" />
             <link href="{{ asset('frontOffice/assets/css/responsive.css') }}"  rel="stylesheet" />
             <link href="{{ asset('frontOffice/assets/images/favicon.png') }}"  rel="stylesheet" />
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
         {% endblock %}
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
 
-<<<<<<< HEAD
         {% block javascripts %}
             <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery.min.js"></script>
             <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
@@ -400,9 +393,7 @@
           
             
             {% endblock %}
-=======
 
->>>>>>> 18a5d7729afbce42a07d276cbd3fae25746b71b2
     </head>
     <body>
         {% block body %}

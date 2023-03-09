@@ -41,6 +41,7 @@ class PharmacieType extends AbstractType
         ])
         ->add('Tempo', DateTimeType::class, [
             'input' => 'datetime',
+            'label' => 'Temps d ouverture',
             'widget' => 'single_text',
             'constraints' => [
                 new Assert\NotBlank(),
@@ -49,6 +50,7 @@ class PharmacieType extends AbstractType
         ])
         ->add('tempf', DateTimeType::class, [
             'input' => 'datetime',
+            'label' => 'Temps de fermeture',
             'widget' => 'single_text',
             'constraints' => [
                 new Assert\NotBlank(),

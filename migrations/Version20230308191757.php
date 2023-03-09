@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230308151850 extends AbstractMigration
+final class Version20230308191757 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -22,10 +22,15 @@ final class Version20230308151850 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE evenement (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, capacite INT NOT NULL, local VARCHAR(255) NOT NULL, date DATE NOT NULL, prix VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE fiche (id INT AUTO_INCREMENT NOT NULL, doctor_id INT DEFAULT NULL, patient_id INT DEFAULT NULL, date_naissance DATE DEFAULT NULL, tel INT DEFAULT NULL, etat_clinique VARCHAR(255) DEFAULT NULL, genre VARCHAR(255) DEFAULT NULL, type_assurance VARCHAR(255) DEFAULT NULL, INDEX IDX_4C13CC7887F4FB17 (doctor_id), INDEX IDX_4C13CC786B899279 (patient_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE medicament (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, nb_dose INT NOT NULL, prix INT NOT NULL, stock INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE med (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, prix VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE medicament (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, nb_dose INT NOT NULL, prix INT NOT NULL, stock INT NOT NULL, image VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE medicament_pharmacie (medicament_id INT NOT NULL, pharmacie_id INT NOT NULL, INDEX IDX_804E4447AB0D61F7 (medicament_id), INDEX IDX_804E4447BC6D351B (pharmacie_id), PRIMARY KEY(medicament_id, pharmacie_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE ordonnance (id INT AUTO_INCREMENT NOT NULL, doctor_id INT DEFAULT NULL, patient_id INT DEFAULT NULL, reservations_id INT DEFAULT NULL, nom_medecin VARCHAR(255) DEFAULT NULL, nom_patient VARCHAR(255) DEFAULT NULL, date DATE DEFAULT NULL, commentaire LONGTEXT DEFAULT NULL, INDEX IDX_924B326C87F4FB17 (doctor_id), INDEX IDX_924B326C6B899279 (patient_id), UNIQUE INDEX UNIQ_924B326CD9A7F869 (reservations_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE ordonnance_medicament (id INT AUTO_INCREMENT NOT NULL, ordonnance_id INT DEFAULT NULL, medicament_id INT DEFAULT NULL, dosage INT DEFAULT NULL, duration INT DEFAULT NULL, INDEX IDX_FE7DFAEE2BF23B8F (ordonnance_id), INDEX IDX_FE7DFAEEAB0D61F7 (medicament_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE pan (id INT AUTO_INCREMENT NOT NULL, totalprix VARCHAR(255) NOT NULL, nom VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE panier (id INT AUTO_INCREMENT NOT NULL, idu_id INT DEFAULT NULL, datecreation DATETIME NOT NULL, UNIQUE INDEX UNIQ_24CC0DF2376A6230 (idu_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE panier_item (id INT AUTO_INCREMENT NOT NULL, medicament_id INT DEFAULT NULL, panier_id INT DEFAULT NULL, quantite INT DEFAULT NULL, totale INT DEFAULT NULL, INDEX IDX_EBFD0067AB0D61F7 (medicament_id), INDEX IDX_EBFD0067F77D927C (panier_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE panierx (id INT AUTO_INCREMENT NOT NULL, id_user_id INT NOT NULL, id_medica_id INT NOT NULL, qte INT NOT NULL, prix DOUBLE PRECISION NOT NULL, INDEX IDX_DF4B49BE79F37AE5 (id_user_id), INDEX IDX_DF4B49BEC711D718 (id_medica_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE pharmacie (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, adresse VARCHAR(255) NOT NULL, tempo TIME NOT NULL, tempf TIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE rate (id INT AUTO_INCREMENT NOT NULL, med_id INT DEFAULT NULL, make_rate_id INT DEFAULT NULL, note DOUBLE PRECISION NOT NULL, opinion VARCHAR(255) DEFAULT NULL, INDEX IDX_DFEC3F39793E396C (med_id), UNIQUE INDEX UNIQ_DFEC3F39CE727896 (make_rate_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE reservation (id INT AUTO_INCREMENT NOT NULL, users_id INT NOT NULL, patient_id INT DEFAULT NULL, fiche_id INT DEFAULT NULL, date DATE NOT NULL, INDEX IDX_42C8495567B3B43D (users_id), INDEX IDX_42C849556B899279 (patient_id), INDEX IDX_42C84955DF522508 (fiche_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -43,6 +48,11 @@ final class Version20230308151850 extends AbstractMigration
         $this->addSql('ALTER TABLE ordonnance ADD CONSTRAINT FK_924B326CD9A7F869 FOREIGN KEY (reservations_id) REFERENCES reservation (id)');
         $this->addSql('ALTER TABLE ordonnance_medicament ADD CONSTRAINT FK_FE7DFAEE2BF23B8F FOREIGN KEY (ordonnance_id) REFERENCES ordonnance (id)');
         $this->addSql('ALTER TABLE ordonnance_medicament ADD CONSTRAINT FK_FE7DFAEEAB0D61F7 FOREIGN KEY (medicament_id) REFERENCES medicament (id)');
+        $this->addSql('ALTER TABLE panier ADD CONSTRAINT FK_24CC0DF2376A6230 FOREIGN KEY (idu_id) REFERENCES `user` (id)');
+        $this->addSql('ALTER TABLE panier_item ADD CONSTRAINT FK_EBFD0067AB0D61F7 FOREIGN KEY (medicament_id) REFERENCES medicament (id)');
+        $this->addSql('ALTER TABLE panier_item ADD CONSTRAINT FK_EBFD0067F77D927C FOREIGN KEY (panier_id) REFERENCES panier (id)');
+        $this->addSql('ALTER TABLE panierx ADD CONSTRAINT FK_DF4B49BE79F37AE5 FOREIGN KEY (id_user_id) REFERENCES `user` (id)');
+        $this->addSql('ALTER TABLE panierx ADD CONSTRAINT FK_DF4B49BEC711D718 FOREIGN KEY (id_medica_id) REFERENCES medicament (id)');
         $this->addSql('ALTER TABLE rate ADD CONSTRAINT FK_DFEC3F39793E396C FOREIGN KEY (med_id) REFERENCES `user` (id)');
         $this->addSql('ALTER TABLE rate ADD CONSTRAINT FK_DFEC3F39CE727896 FOREIGN KEY (make_rate_id) REFERENCES `user` (id)');
         $this->addSql('ALTER TABLE reservation ADD CONSTRAINT FK_42C8495567B3B43D FOREIGN KEY (users_id) REFERENCES `user` (id)');
@@ -66,6 +76,11 @@ final class Version20230308151850 extends AbstractMigration
         $this->addSql('ALTER TABLE ordonnance DROP FOREIGN KEY FK_924B326CD9A7F869');
         $this->addSql('ALTER TABLE ordonnance_medicament DROP FOREIGN KEY FK_FE7DFAEE2BF23B8F');
         $this->addSql('ALTER TABLE ordonnance_medicament DROP FOREIGN KEY FK_FE7DFAEEAB0D61F7');
+        $this->addSql('ALTER TABLE panier DROP FOREIGN KEY FK_24CC0DF2376A6230');
+        $this->addSql('ALTER TABLE panier_item DROP FOREIGN KEY FK_EBFD0067AB0D61F7');
+        $this->addSql('ALTER TABLE panier_item DROP FOREIGN KEY FK_EBFD0067F77D927C');
+        $this->addSql('ALTER TABLE panierx DROP FOREIGN KEY FK_DF4B49BE79F37AE5');
+        $this->addSql('ALTER TABLE panierx DROP FOREIGN KEY FK_DF4B49BEC711D718');
         $this->addSql('ALTER TABLE rate DROP FOREIGN KEY FK_DFEC3F39793E396C');
         $this->addSql('ALTER TABLE rate DROP FOREIGN KEY FK_DFEC3F39CE727896');
         $this->addSql('ALTER TABLE reservation DROP FOREIGN KEY FK_42C8495567B3B43D');
@@ -77,10 +92,15 @@ final class Version20230308151850 extends AbstractMigration
         $this->addSql('ALTER TABLE user_user DROP FOREIGN KEY FK_F7129A80233D34C1');
         $this->addSql('DROP TABLE evenement');
         $this->addSql('DROP TABLE fiche');
+        $this->addSql('DROP TABLE med');
         $this->addSql('DROP TABLE medicament');
         $this->addSql('DROP TABLE medicament_pharmacie');
         $this->addSql('DROP TABLE ordonnance');
         $this->addSql('DROP TABLE ordonnance_medicament');
+        $this->addSql('DROP TABLE pan');
+        $this->addSql('DROP TABLE panier');
+        $this->addSql('DROP TABLE panier_item');
+        $this->addSql('DROP TABLE panierx');
         $this->addSql('DROP TABLE pharmacie');
         $this->addSql('DROP TABLE rate');
         $this->addSql('DROP TABLE reservation');

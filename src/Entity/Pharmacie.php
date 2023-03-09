@@ -8,39 +8,51 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+use DateTime;
+use DateTimeInterface;
+
+
 
 
 
 #[ORM\Entity(repositoryClass: PharmacieRepository::class)]
 class Pharmacie
 {
+    
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("pharmacies")]
+
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Nom est obligatoire")]
+    #[Groups("pharmacies")]
+
     private ?string $Nom = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Adresse est obligatoire")]
-
+    #[Groups("pharmacies")]
     private ?string $Adresse = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     #[Assert\NotBlank(message:"Veuiller chosir une date")]
+    #[Groups("pharmacies")]
     private ?\DateTimeInterface $Tempo = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     #[Assert\NotBlank(message:"Veuiller chosir une date")]
+    #[Groups("pharmacies")]
     private ?\DateTimeInterface $tempf = null;
 
     #[ORM\ManyToMany(targetEntity: Medicament::class, mappedBy: 'id_pharmacie')]
-    private Collection $medicaments;
+    public Collection $medicaments;
 
-    
-
+     
     public function __construct()
     {
         $this->medicaments = new ArrayCollection();
@@ -80,12 +92,20 @@ class Pharmacie
 
     public function getTempo(): ?\DateTimeInterface
     {
+        
         return $this->Tempo;
     }
 
-    public function setTempo(\DateTimeInterface $Tempo): self
+    public function setTempo($Tempo): self
     {
+        if (!$Tempo instanceof DateTimeInterface) {
+            // Convertit la chaîne de caractères en objet DateTimeInterface
+            $Tempo = new DateTime($Tempo);
+        }
+
         $this->Tempo = $Tempo;
+       // $this->Tempo = $Tempo;
+        
 
         return $this;
     }
@@ -95,12 +115,18 @@ class Pharmacie
         return $this->tempf;
     }
 
-    public function setTempf(\DateTimeInterface $tempf): self
+    public function setTempf($tempf): self
     {
+        if (!$tempf instanceof DateTimeInterface) {
+            // Convertit la chaîne de caractères en objet DateTimeInterface
+            $tempf = new DateTime($tempf);
+        }
+
         $this->tempf = $tempf;
 
         return $this;
     }
+    
 
     /**
      * @return Collection<int, Medicament>
@@ -109,6 +135,7 @@ class Pharmacie
     {
         return $this->medicaments;
     }
+    
 
     public function addMedicament(Medicament $medicament): self
     {
